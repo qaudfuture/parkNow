@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "prepare":"husky install"
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "18.1.0",
