@@ -44,7 +44,7 @@
   "jest": {
     "preset": "react-native"
   },
-   "lint-staged": {
+  "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run lint",
       "npm run format"
