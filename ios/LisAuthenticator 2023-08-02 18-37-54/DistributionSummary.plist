@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LisAuthenticator.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>38</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>8492CA085BB63E83A59DCC96C7A1B69B8F9A087C</string>
+				<key>dateExpires</key>
+				<string>05/03/2024</string>
+				<key>type</key>
+				<string>Apple Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>Y6H4935CS2.com.lisec.lis.lisecauthenticator</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>Y6H4935CS2</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>LisAuthenticator.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>46a87017-b95d-42a0-81c2-8fd18b069ff1</string>
+				<key>dateExpires</key>
+				<string>05/03/2024</string>
+				<key>name</key>
+				<string>Lisec.Authenticator_provisioningprofile</string>
+			</dict>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>Y6H4935CS2</string>
+				<key>name</key>
+				<string>LISEC Austria GmbH</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.1.7</string>
+		</dict>
+	</array>
+</dict>
+</plist>

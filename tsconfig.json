@@ -15,7 +15,18 @@
         "resolveJsonModule": true,
         "baseUrl": ".",
         "paths": {
-            "@components/":["src/components/**"]
+            "@components/*": [
+                "src/components/*"
+            ],
+            "@screen/*": [
+                "src/features/*"
+            ],
+            "@Routes/*": [
+                "src/routes/*"
+            ],
+            "@Resources/*": [
+                "src/resources/*"
+            ]
         }
     },
     "exclude": [
