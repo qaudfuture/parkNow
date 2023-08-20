@@ -4,13 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { OnBoarding } from '../features/onboarding';
 import { RouteName } from './routeName';
 
-const { Navigator, Screen } = createNativeStackNavigator();
-export const OnBoardingStack = () => (
-    <Navigator
-        initialRouteName={RouteName.LOGIN}
+const OnboardingStack = createNativeStackNavigator();
+export const OnBoardingStackNavigator = () => (
+    <OnboardingStack.Navigator
+        initialRouteName={RouteName.ONBOARDING}
         screenOptions={{
             headerShown: false,
         }}>
-        <Screen key={RouteName.ONBOARDING} name={RouteName.ONBOARDING} component={OnBoarding} />
-    </Navigator>
+        <OnboardingStack.Screen key={RouteName.ONBOARDING} name={RouteName.ONBOARDING} component={OnBoarding} />
+    </OnboardingStack.Navigator>
 );

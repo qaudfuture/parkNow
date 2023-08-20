@@ -6,8 +6,9 @@ interface LoginHeaderProps {
     title: string;
     navigation: any; // You can use the correct type from @react-navigation/native
     showBackButton?: boolean;
+    _onClickLogin(): void;
 }
-const LoginHeader: React.FC<LoginHeaderProps> = ({ title, navigation, showBackButton = true }) => {
+const LoginHeader: React.FC<LoginHeaderProps> = ({ title, navigation, showBackButton = true, _onClickLogin }) => {
     const handleBackPress = () => {
         navigation.goBack();
     };
@@ -18,9 +19,9 @@ const LoginHeader: React.FC<LoginHeaderProps> = ({ title, navigation, showBackBu
                     <BackImage source={Images.backArrowDark} resizeMode='contain' />
                 </LeftContainer>
             )}
-            <SignInButton>
+            <SignInButton onPress={_onClickLogin}>
                 <Text>Sign In</Text>
-            </SignInButton>{' '}
+            </SignInButton>
             <Text>{title}</Text>
         </HeaderContainer>
     );

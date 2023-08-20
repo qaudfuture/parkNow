@@ -1,2 +1,2 @@
-export { default as Text } from './text';
+export { default as Text } from './Text';
 export { TextVariant } from './type';

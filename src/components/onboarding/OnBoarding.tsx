@@ -1,19 +1,20 @@
 import { View, Animated } from 'react-native';
 import { constantItems } from './type';
-import { Button } from '@components/Button';
+import { Button } from '../Button';
 import React, { useRef } from 'react';
 import OnBoardingItem from './OnBoardingItem';
 import Indicator from './OnBoardingIndicator';
 
-const OnBoardingComp: React.FC = () => {
-    const scrollX = useRef(new Animated.Value(0)).current;
-    // const viewAbleItemsChanged = useRef(({ viewAbleItems: { } }) => {
-    //     setCurrentIndex(viewAbleItems[0].index)
-    // }).current
+type OnBoardingProps = {
+    onClickLogin(): void;
+    onClickRegister(): void;
+};
 
+const OnBoardingComp: React.FC<OnBoardingProps> = ({ onClickLogin, onClickRegister }) => {
+    const scrollX = useRef(new Animated.Value(0)).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginVertical: 10 }}>
             <Animated.FlatList
                 data={constantItems}
                 renderItem={({ item }) => <OnBoardingItem item={item} />}
@@ -30,11 +31,11 @@ const OnBoardingComp: React.FC = () => {
                 scrollEventThrottle={32}
             />
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: 'black' }}>
-                <Button title='Sign up' buttonStyles={{ backgroundColor: '#FFF' }} onPressButton={() => {}} />
+                <Button title='Sign up' buttonStyles={{ backgroundColor: '#FFF' }} onPressButton={onClickLogin} />
                 <Button
                     title='Login'
                     buttonStyles={{ backgroundColor: '#FFF', width: '60%' }}
-                    onPressButton={() => {}}
+                    onPressButton={onClickRegister}
                 />
                 <Indicator scrollX={scrollX} />
             </View>

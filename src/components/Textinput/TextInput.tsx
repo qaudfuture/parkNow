@@ -5,21 +5,21 @@ import { StyledTextInput } from './TextInput.styles';
 interface StyledTextInputProps extends TextInputProps {
     isPassword?: boolean;
     isConfirmPassword?: boolean;
-    errorMsg?: string;
+    errorMsg: string | boolean | undefined;
     isError?: boolean;
 }
 
 const CustomTextInput: React.FC<StyledTextInputProps> = (props: StyledTextInputProps) => {
-    const { isPassword = false, isConfirmPassword = false, isError = false, errorMsg = '' } = props;
-    const showError = isError && errorMsg;
+    const { isPassword = false, isConfirmPassword = false, errorMsg = '' } = props;
     return (
         <View>
             <StyledTextInput
                 {...props}
+                error={errorMsg}
                 placeholderTextColor='#6B7378'
                 secureTextEntry={isPassword || isConfirmPassword}
             />
-            {showError && <Text>{errorMsg}</Text>}
+            {errorMsg && <Text>{errorMsg}</Text>}
         </View>
     );
 };
