@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, TextInput, Text, Button, Header } from '../../components';
+import { View } from 'react-native';
+import { Layout, TextInput, Text, Button, Header, Spacer, RegisterProgressIndicator } from '../../components';
 import useFormikWithRedux from '../../hooks/useFormik';
 import { RouteName } from '../../routes/routeName';
 import { ScreenProps } from '../../routes/type';
@@ -9,6 +10,12 @@ export type OnRegisterProps = ScreenProps<RouteName.REGISTER>;
 const Register: React.FC<OnRegisterProps> = (props: OnRegisterProps) => {
     const { navigation } = props;
     const _onClickLogin = () => navigation.navigate('AuthStack', { screen: RouteName.LOGIN });
+    const _onClickCompleteRegister = () => navigation.navigate('AuthStack', { screen: RouteName.REGISTERUPLOAD });
+
+    const _onClickNext = () => {
+        formik.handleSubmit();
+        _onClickCompleteRegister();
+    };
 
     const { formik } = useFormikWithRedux();
     return (
@@ -16,14 +23,18 @@ const Register: React.FC<OnRegisterProps> = (props: OnRegisterProps) => {
             header={<Header.LoginHeader _onClickLogin={_onClickLogin} />}
             footer={
                 <Button
-                    title='Sign up'
+                    title='Next'
                     buttonStyles={{ backgroundColor: '#FED94D', marginBottom: 10, width: '90%', alignSelf: 'center' }}
-                    onPressButton={() => {
-                        formik.handleSubmit();
-                    }}
+                    onPressButton={_onClickNext}
                 />
             }>
             <Text variant='header'>Set up your profile</Text>
+            <Spacer size='md' />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <RegisterProgressIndicator isLastScreen={true} />
+                <RegisterProgressIndicator isLastScreen={false} />
+            </View>
+            <Spacer size='sm' />
             <Text variant='body' style={{ marginVertical: 15 }}>
                 Create your account so you can manage your parking cards faster
             </Text>

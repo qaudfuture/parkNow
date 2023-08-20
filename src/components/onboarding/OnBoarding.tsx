@@ -1,6 +1,6 @@
 import { View, Animated } from 'react-native';
 import { constantItems } from './type';
-import { Button } from '../Button';
+import { Button } from '../button';
 import React, { useRef } from 'react';
 import OnBoardingItem from './OnBoardingItem';
 import Indicator from './OnBoardingIndicator';

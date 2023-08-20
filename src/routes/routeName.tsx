@@ -13,6 +13,7 @@ export enum RouteName {
 
     LOGIN = 'Login',
     REGISTER = 'register',
+    REGISTERUPLOAD = 'registerimage',
 
     //FIND_MY_CAR Stack
     Find_MY_CAR_STACK = 'Find_MY_CAR',

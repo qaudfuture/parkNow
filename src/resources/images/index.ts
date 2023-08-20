@@ -5,4 +5,6 @@ export const Images = {
     backArrow: require('../images/Back-arrow.png'),
     backArrowDark: require('../images/Back-arrow-dark.png'),
     logo: require('../images/logo.png'),
+    userAvatar: require('../images/user.png'),
+    addImage: require('../images/plus.png'),
 };

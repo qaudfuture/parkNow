@@ -16,6 +16,7 @@ export type DashboardStackParamList = {
 export type AuthStackParamList = {
     [RouteName.LOGIN]: undefined;
     [RouteName.REGISTER]: undefined;
+    [RouteName.REGISTERUPLOAD]: undefined;
 };
 
 //OnBoard Stack
