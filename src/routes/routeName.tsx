@@ -10,7 +10,9 @@ export enum RouteName {
     PARK_CAR = 'Park_car',
 
     //Login Stack
-    LOGIN = 'login_stack',
+
+    LOGIN = 'Login',
+    REGISTER = 'register',
 
     //FIND_MY_CAR Stack
     Find_MY_CAR_STACK = 'Find_MY_CAR',

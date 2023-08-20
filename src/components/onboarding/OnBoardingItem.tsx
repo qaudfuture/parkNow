@@ -1,7 +1,7 @@
 import { View, useWindowDimensions, StyleSheet, Image } from 'react-native';
 import React from 'react';
 import { OnBoardingProps } from './type';
-import { Text } from '@components/text';
+import { Text } from '@components/Text';
 import { Images } from '../../resources/images';
 
 // Define the props type for the item component

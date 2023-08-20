@@ -1,6 +1,10 @@
 import * as Layout from './layout';
-import * as Header from './Header';
-import { TextInput } from './Textinput';
-import { Text, TextVariant } from './text';
+import * as Header from './header';
+import LoginHeader from './header/LoginHeader';
 
-export { Layout, TextInput, Text, TextVariant, Header };
+import { TextInput } from './textInput';
+import { Button } from './button';
+import { Text, TextVariant } from './text';
+import { Spacer } from './spacer';
+
+export { Layout, TextInput, Text, TextVariant, Header, Button, LoginHeader, Spacer };

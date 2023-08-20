@@ -12,17 +12,18 @@ export const HeaderContainer = styled.View`
 export const LeftContainer = styled.TouchableOpacity`
     position: absolute;
     left: 10px;
-    padding: 10px;
+    padding: 5px;
 `;
 //background - color: ${ theme.colors.primary };
 export const BackImage = styled.Image`
     height: 20px;
     width: 20px;
-    justify-content: 'center';
+    justify-content: center;
 `;
 
 export const SignInButton = styled.TouchableOpacity`
-    margin-left: 20px;
+    position: absolute;
+    right: 10px;
     padding: 10px;
     border-radius: 30px;
     border: 1px solid #eaebec;

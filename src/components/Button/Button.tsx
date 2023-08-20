@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleProp, ViewStyle, TouchableOpacity, TextStyle } from 'react-native';
-import { Text } from '@components/text';
+import { Text } from '../text';
 
 type ButtonProps = {
     buttonStyles?: StyleProp<ViewStyle>;
@@ -18,6 +18,11 @@ const defaultProps: Partial<ButtonProps> = {
         justifyContent: 'center',
         alignItems: 'center',
         minWidth: '30%',
+        shadowColor: 'rgba(0, 0, 0, 0.1)',
+        shadowOpacity: 0.8,
+        elevation: 6,
+        shadowRadius: 15,
+        shadowOffset: { width: 1, height: 13 },
     },
     titleStyles: {},
 };
