@@ -5,6 +5,11 @@ export const Images = {
     backArrow: require('../images/Back-arrow.png'),
     backArrowDark: require('../images/Back-arrow-dark.png'),
     logo: require('../images/logo.png'),
-    userAvatar: require('../images/user.png'),
+    userAvatar: require('../images/man.png'),
     addImage: require('../images/plus.png'),
+    notification: require('../images/notification.png'),
+    bookcard: require('../images/book-card.png'),
+    Usedcard: require('../images/Usedcard.png'),
+    ParkCar: require('../images/parkcar.png'),
+    payments: require('../images/wallet.png'),
 };

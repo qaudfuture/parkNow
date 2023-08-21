@@ -35,7 +35,7 @@ const Base: React.FC<BaseProps> = (props: BaseProps) => {
 
 const style = StyleSheet.create({
     safeArea: {
-        backgroundColor: '#0D0D0D',
+        backgroundColor: '#F9F9F9',
     },
     safeAreaView: {
         flex: 1,

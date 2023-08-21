@@ -1,12 +1,8 @@
 import styled from 'styled-components/native';
 
 export const HeaderContainer = styled.View`
-    flexdirection: 'row';
-    align-items: center;
-    align-content: center;
     justify-content: center;
     height: 60px;
-    backgroundcolor: '#2196F3';
 `;
 
 export const LeftContainer = styled.TouchableOpacity`
@@ -28,4 +24,20 @@ export const SignInButton = styled.TouchableOpacity`
     border-radius: 30px;
     border: 1px solid #eaebec;
     align-self: flex-end;
+`;
+
+//background - color: ${ theme.colors.primary };
+export const Image = styled.Image`
+    height: 40px;
+    width: 40px;
+`;
+
+export const ImageContainer = styled.View`
+    margin-horizontal: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+export const DashBoardHeaderContainer = styled(HeaderContainer)`
+    height: 100px;
 `;
