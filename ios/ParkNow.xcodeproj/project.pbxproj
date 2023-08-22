@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		70D54217152D4A70576F5B1C /* libPods-ParkNow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD8A6DB520CBE2AE901D25F /* libPods-ParkNow.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		AF63502E2A923BF40080CAC4 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = AF63502D2A923BF40080CAC4 /* Fonts */; };
 		DF45CA345E3325E6236841DC /* libPods-ParkNow-ParkNowTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4900AFF424F37583763654E /* libPods-ParkNow-ParkNowTests.a */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		6BD8A6DB520CBE2AE901D25F /* libPods-ParkNow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkNow.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7514A7B72E9F19803398D26B /* Pods-ParkNow-ParkNowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNow-ParkNowTests.debug.xcconfig"; path = "Target Support Files/Pods-ParkNow-ParkNowTests/Pods-ParkNow-ParkNowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ParkNow/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AF63502D2A923BF40080CAC4 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		B4900AFF424F37583763654E /* libPods-ParkNow-ParkNowTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkNow-ParkNowTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE006113BCEE0528D9FD5854 /* Pods-ParkNow-ParkNowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNow-ParkNowTests.release.xcconfig"; path = "Target Support Files/Pods-ParkNow-ParkNowTests/Pods-ParkNow-ParkNowTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -86,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* ParkNow */ = {
 			isa = PBXGroup;
 			children = (
+				AF63502D2A923BF40080CAC4 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -250,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF63502E2A923BF40080CAC4 /* Fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

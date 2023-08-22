@@ -61,7 +61,10 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>UIAppFonts</key>
-	<array>
+	<array>	
+	    <string>FontAwesome.ttf</string>
+    <string>Ionicons.ttf</string>
+    <string>Feather.ttf</string>
 		<string>outer-sans-black.otf</string>
 		<string>Outer-Sans-Medium.otf</string>
 		<string>Outer-Sans-Outline-Bold.otf</string>

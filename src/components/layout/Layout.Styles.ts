@@ -10,7 +10,7 @@ export const Header = styled.KeyboardAvoidingView`
 //background - color: ${ theme.colors.primary };
 export const Content = styled.View`
     flex: 1;
-    padding-horizontal: 16px;
+    padding-horizontal: 25px;
     flexgrow: 1;
 `;
 // paddingBottom: 16px;

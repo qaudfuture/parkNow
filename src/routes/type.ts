@@ -6,7 +6,7 @@ import { NativeStackScreenProps, NativeStackNavigationProp } from '@react-naviga
 
 // Dashboard Stack
 export type DashboardStackParamList = {
-    // [RouteName.DASHBOARD]: undefined;
+    [RouteName.DASHBOARD]: undefined;
     // [RouteName.STORY_LIST]: StoyListPrams;
     // [RouteName.STORY_DETAIL]: StoryDetailsParams;
     // [RouteName.STORY_SEARCH]: undefined;

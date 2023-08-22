@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteName } from './routeName';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DashboardStackParamList } from './type';
-
+import { Dashboard } from '../features/dashboard';
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 
 const DashboardStack = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AuthStackNavigator } from './loginStack';
 import { OnBoardingStackNavigator } from './onboardingStack';
+import { TabNavigator } from './bottomtabStack';
 // import DashboardStack from './dashbaordStack';
 import { NavigationService } from './navigationService';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,11 +14,13 @@ type AppNavigatorProps = {
 const AppNavigator: React.FC<AppNavigatorProps> = (props: AppNavigatorProps) => {
     const Stack = createNativeStackNavigator();
 
-    const { isLoggedIn = false } = props;
+    const { isLoggedIn } = props;
     return (
         <NavigationContainer>
             {isLoggedIn ? (
-                <></>
+                <>
+                    <TabNavigator />
+                </>
             ) : (
                 <Stack.Navigator
                     screenOptions={{
