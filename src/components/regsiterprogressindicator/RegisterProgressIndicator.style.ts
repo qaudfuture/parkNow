@@ -8,6 +8,6 @@ export const ProgressIndicatorContainer = styled.View`
 export const ProgressIndicator = styled.View`
     border-radius: 6px;
     height: 3px;
-    width: 48%;
+    width: ${({ width }) => width || '48%'};
     background-color: ${(props) => (props.isSecondScreen ? '#FED94D' : 'gray')};
 `;

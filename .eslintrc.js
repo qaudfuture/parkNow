@@ -67,7 +67,7 @@ module.exports = {
     'no-tabs': 'off',
     "no-unused-vars": 'off',
     "@typescript-eslint/no-unused-vars": "error",
-    'max-len': ['error', { code: 200 }],
+    'max-len': ['error', { code: 300 }],
     'import/extensions': [
       'error',
       'always',
@@ -83,6 +83,15 @@ module.exports = {
       {
         extensions: ['.tsx'] // Allow JSX in TypeScript files with the '.tsx' extension
       }
+    ],
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        extendDefaults: true,
+        types: {
+          '{}': false,
+        },
+      },
     ],
     'react/function-component-definition': [
       'error',

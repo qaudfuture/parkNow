@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const StyledListItem = styled.View`
+export const StyledListItem = styled.TouchableOpacity`
     background-color: ${({ color }) => color || 'white'};
     justify-content: center;
     margin: 5px;
@@ -9,7 +9,7 @@ export const StyledListItem = styled.View`
     width: 100px;
     height: 80px;
     border-bottom-width: 1px;
-    border-bottom-color: lightgray;
+    border-bottom-color: ${({ theme }) => theme.colors.gray};
 `;
 
 export const Image = styled.Image`

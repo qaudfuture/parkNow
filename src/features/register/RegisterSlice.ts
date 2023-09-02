@@ -1,24 +1,36 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// import { SetLoginProps } from '../../hooks/useAuth';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface UserProfile {
-    name: string;
-    email: string;
-}
-
-const initialState: UserProfile = {
-    name: '',
-    email: '',
+type RegistrationState = {
+    loading: boolean;
+    data?: unknown;
+    error?: unknown;
+    showToast: boolean;
 };
 
-const userSlice = createSlice({
-    name: 'user',
+const initialState: RegistrationState = {
+    loading: false,
+    error: undefined,
+    data: undefined,
+    showToast: false,
+};
+// action: PayloadAction<SetLoginProps>;
+const registrationReducer = createSlice({
+    name: 'registration',
     initialState,
     reducers: {
-        setUserProfile: (state, action: PayloadAction<UserProfile>) => {
-            return action.payload;
+        request(state: RegistrationState) {
+            return { ...state, loading: true };
         },
+        success(state: RegistrationState, action: PayloadAction<unknown>) {
+            return { ...state, loading: false, data: action.payload, showToast: true };
+        },
+        error(state: RegistrationState, action: PayloadAction<unknown>) {
+            return { ...state, loading: false, error: action.payload, showToast: true };
+        },
+        clear: () => initialState,
     },
 });
 
-export const { setUserProfile } = userSlice.actions;
-export default userSlice.reducer;
+export const { actions } = registrationReducer;
+export default registrationReducer.reducer;

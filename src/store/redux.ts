@@ -1,11 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '../features/register/RegisterSlice';
+import RegistrationActions from '../features/register/RegisterSlice';
 
-export const store = configureStore({
-    reducer: {
-        user: userReducer,
-    },
+import LoginReducer from '../features/login/LoginSlice';
+import CardBookingReducer from '../features/cardbooking/CardBookingSlice';
+
+import { combineReducers } from 'redux';
+
+export default combineReducers({
+    auth: combineReducers({
+        login: LoginReducer,
+        registration: RegistrationActions,
+    }),
+    cardBooking: CardBookingReducer,
 });
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;

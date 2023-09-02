@@ -7,6 +7,14 @@ import { NativeStackScreenProps, NativeStackNavigationProp } from '@react-naviga
 // Dashboard Stack
 export type DashboardStackParamList = {
     [RouteName.DASHBOARD]: undefined;
+    [RouteName.PAYMENT_DETAILS]: undefined;
+    [RouteName.ADD_PAYMENT]: undefined;
+    [RouteName.PAYMENT_SUCCESS]: undefined;
+    [RouteName.SETTLE_PAYMENT]: undefined;
+    [RouteName.BOOK_CARD]: undefined;
+    [RouteName.PROFILE_DETAILS]: undefined;
+    [RouteName.BOOK_CARDAVAILABLE_SLOTS]: undefined;
+
     // [RouteName.STORY_LIST]: StoyListPrams;
     // [RouteName.STORY_DETAIL]: StoryDetailsParams;
     // [RouteName.STORY_SEARCH]: undefined;
