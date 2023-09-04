@@ -1,7 +1,7 @@
 // import { LoginActions } from '@TopStories/Screen/Login';
 import { useAppDispatch, useAppSelector } from './redux';
 import { get } from 'lodash';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RegistrationActions } from '../features/register';
 import { LoginActions } from '../features/login';
 
@@ -29,9 +29,12 @@ const useAuth = () => {
     const loginData = get(authData, 'login');
     const registrationData = get(authData, 'registration');
 
-    const accesToken = get(loginData, ['data', 'access_token'], false);
-    if (accesToken) setLoggedIn(true);
+    const accesToken = get(loginData, ['data', 'token'], false);
 
+    useEffect(() => {
+        setLoggedIn(true);
+    }, [accesToken]);
+    // if (accesToken)
     const dispatchLogin = ({ email, password }: SetLoginAuthProps) => {
         dispatch(LoginActions.clearState());
         dispatch(LoginActions.request({ email, password }));

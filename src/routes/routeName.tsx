@@ -7,6 +7,8 @@ export enum RouteName {
     DASHBOARD = 'Home',
     BOOK_CARD = 'Book_card',
     BOOK_CARDAVAILABLE_SLOTS = 'CardBookingAvailableSlots',
+    BOOK_CARDCONFIRM = 'CardBookConfirm',
+    BOOK_CARDSUCCEESS = 'CardBookingSuccess',
 
     USED_CARDS = 'Used_cards',
     PARK_CAR = 'Park_car',

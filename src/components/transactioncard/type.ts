@@ -2,11 +2,11 @@
 import { ImageSourcePropType } from 'react-native';
 
 export interface TransactionCardListProps {
-    name: string;
+    payedBy: string;
     transactionDate: string;
     image?: ImageSourcePropType;
-    payment?: number;
-    incoming?: boolean;
+    amount?: number;
+    isPayment?: boolean;
 }
 
 export interface TransactionCardProps {

@@ -1,10 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Layout, TextInput, Text, Button, Header, Spacer, RegisterProgressIndicator } from '../../components';
 import validateForm from '../../hooks/useFormik';
 // import useAuth from '../../hooks/useAuth';
 import { RouteName } from '../../routes/routeName';
 import { ScreenProps } from '../../routes/type';
+import { ProgreesIndicatorContainer } from './Register.styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export type OnRegisterProps = ScreenProps<RouteName.REGISTER>;
@@ -32,25 +33,20 @@ const Register: React.FC<RegistrationPros> = (navigationValu) => {
             footer={
                 <Button
                     title='Next'
-                    buttonStyles={{
-                        backgroundColor: '#FED94D',
-                        marginBottom: 10,
-                        width: '90%',
-                        alignSelf: 'center',
-                    }}
+                    buttonStyles={{ ...styles.registerButton, backgroundColor: '#FED94D' }}
                     onPressButton={handleNextScreen}
                 />
             }>
             <KeyboardAwareScrollView
-                style={{ flex: 1 }}
-                contentContainerStyle={{ flexGrow: 1 }}
+                style={styles.container}
+                contentContainerStyle={styles.contentContainer}
                 keyboardShouldPersistTaps='handled'>
                 <Text variant='header'>Set up your profile</Text>
                 <Spacer size='md' />
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <ProgreesIndicatorContainer>
                     <RegisterProgressIndicator isLastScreen={true} width='48%' />
                     <RegisterProgressIndicator isLastScreen={false} width='48%' />
-                </View>
+                </ProgreesIndicatorContainer>
                 <Spacer size='sm' />
                 <Text variant='body' style={{ marginVertical: 15 }}>
                     Create your account so you can manage your parking cards faster
@@ -112,3 +108,13 @@ const Register: React.FC<RegistrationPros> = (navigationValu) => {
 };
 
 export default Register;
+
+const styles = StyleSheet.create({
+    registerButton: {
+        marginBottom: 10,
+        width: '90%',
+        alignSelf: 'center',
+    },
+    container: { flex: 1 },
+    contentContainer: { flexGrow: 1 },
+});

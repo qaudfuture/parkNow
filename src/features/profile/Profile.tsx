@@ -9,6 +9,8 @@ import { ScreenProps } from '../../routes/type';
 import { Image } from './Profile.style';
 import { RouteName } from '../../routes/routeName';
 import { profileCardfeatureList } from '../../constants/featureList';
+// import useEncryptedStorage from '../../hooks/useUserData'; // Import your custom hook
+
 export type ProfileProps = ScreenProps<RouteName.PROFILE_DETAILS>;
 
 const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
@@ -16,6 +18,13 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
     const { logOut } = useIsLoggedIn();
 
     const { setLoggedOut } = useAuth();
+
+    // useEffect(() => {
+    //     const parsedUserData = JSON.parse(loggedInData);
+    //     console.log('loginDataWWWWWWWW', JSON.parse(parsedUserData));
+
+    //     // Replace with your actual data key
+    // }, []);
     const _onClickFeature = (screenName: string) => {
         console.log('screenName', screenName);
         if (screenName == RouteName.LOGIN) {
@@ -23,9 +32,9 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
             logOut();
             navigation.navigate(RouteName.LOGIN);
         }
-        // navigation.navigate(screenName);
+        navigation.navigate(screenName);
     };
-
+    // const loggedInData = useEncryptedStorage(SecureStorageKey.USER_DATA);
     return (
         <Layout.Base>
             <DashBoardHeader title='Profile' />
@@ -36,11 +45,11 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 </View>
                 <View style={{ minWidth: '55%', justifyContent: 'center' }}>
                     <Text variant='header' style={{ fontSize: 18, textAlign: 'left' }}>
-                        Harshavardhan Rai
+                        Harsha
                     </Text>
                     <Spacer size='sm' />
                     <Text variant='title' style={{ fontSize: 12, textAlign: 'left', color: 'gray' }}>
-                        Harshavardhan Rai
+                        hvardhan2011@gmail.com
                     </Text>
                 </View>
                 <View style={{ minWidth: '15%', justifyContent: 'center', alignItems: 'center' }}>

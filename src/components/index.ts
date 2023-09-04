@@ -13,6 +13,7 @@ import { TextInput } from './textInput';
 import { RegisterProgressIndicator } from './regsiterprogressindicator';
 import { TransactionSelector } from './transactionselector';
 import { TransactionCard } from './transactioncard';
+import { BookingDetail } from './bookingdetailscard';
 import { UserListCard } from './userlist';
 import { CustomToast } from './toast';
 import { Button } from './button';
@@ -21,6 +22,10 @@ import { Spacer } from './spacer';
 import { Card } from './card';
 import { DatePicker } from './datepicker';
 import { Loader } from './loader';
+import { BottomCard } from './bottommodal';
+import { DateTimePicker } from './datetimePicker';
+import Error from './error';
+export { default as ErrorBoundry } from './errorboundary';
 
 export {
     Layout,
@@ -47,4 +52,8 @@ export {
     CustomToast,
     DatePicker,
     Loader,
+    BookingDetail,
+    BottomCard,
+    DateTimePicker,
+    Error,
 };

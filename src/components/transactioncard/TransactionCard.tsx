@@ -9,45 +9,53 @@ import {
 } from './Transaction.style';
 import { FlatList } from 'react-native';
 import { Spacer, Text } from '../../components';
-import { TransactionCardProps } from './type';
+import { TransactionCardProps, TransactionCardListProps } from './type';
 import { Images } from '../../resources/images';
 
 const defaultProps: Partial<TransactionCardProps> = {
-    name: 'Harsha',
-    transactionDate: '23-07-2023',
+    payedBy: 'Harsha',
+    date: '23-07-2023',
     image: Images.userAvatar,
-    payment: 120,
-    incoming: true,
+    amount: 120,
+    isPayment: true,
 };
 const TransactionCard: React.FC<TransactionCardProps> = ({ data }: TransactionCardProps & typeof defaultProps) => {
-    const renderItem = () => (
-        <>
-            <Spacer size='xs' />
-            <Container>
-                <LeftInnerContainer>
-                    <ImageContainer>
-                        <Image source={Images.userAvatar} resizeMode='contain' />
-                    </ImageContainer>
-                    <Spacer size='xs' />
-                    <LeftPreviousBookingUserContainer>
-                        <Text variant='body' style={{ fontSize: 14 }}>
-                            Harsha
-                        </Text>
+    const renderItem = ({ item }: { item: TransactionCardListProps }) => {
+        const transactionDate = item?.date.split('T')[0];
+        console.log('STATTUSS', item);
+
+        return (
+            <>
+                <Spacer size='xs' />
+                <Container>
+                    <LeftInnerContainer>
+                        <ImageContainer>
+                            <Image source={Images.userAvatar} resizeMode='contain' />
+                        </ImageContainer>
                         <Spacer size='xs' />
-                        <Text variant='title' style={{ fontSize: 12 }}>
-                            PreviousBookingCard
+                        <LeftPreviousBookingUserContainer>
+                            <Spacer size='xs' />
+                            <Text variant='body' style={{ fontSize: 14 }}>
+                                {item.isPayment ? 'Harsha' : item.payedBy}
+                            </Text>
+                            <Spacer size='xs' />
+                            <Text variant='title' style={{ fontSize: 12 }}>
+                                {transactionDate}
+                            </Text>
+                        </LeftPreviousBookingUserContainer>
+                    </LeftInnerContainer>
+                    <RightInnerContainer>
+                        <Text
+                            variant='title'
+                            style={{ textAlign: 'right', fontSize: 12, color: item.isPayment ? 'red' : 'green' }}>
+                            {item.amount}
                         </Text>
-                    </LeftPreviousBookingUserContainer>
-                </LeftInnerContainer>
-                <RightInnerContainer>
-                    <Text variant='title' style={{ textAlign: 'right', fontSize: 12, color: 'gray' }}>
-                        Today
-                    </Text>
-                </RightInnerContainer>
-            </Container>
-            <Spacer size='xs' />
-        </>
-    );
+                    </RightInnerContainer>
+                </Container>
+                <Spacer size='xs' />
+            </>
+        );
+    };
 
     return <FlatList data={data} renderItem={renderItem} keyExtractor={(item, index) => index} />;
 };

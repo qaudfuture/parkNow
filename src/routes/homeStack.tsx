@@ -3,7 +3,7 @@ import { RouteName } from './routeName';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DashboardStackParamList } from './type';
 import { Dashboard } from '../features/dashboard';
-import { CardBooking, CardBookingAvailableSlots } from '../features/cardbooking';
+import { CardBooking, CardBookingAvailableSlots, CardBookConfirm, CardBookingSuccess } from '../features/cardbooking';
 import { PaymentDetails, AddPaymentDetails, PaymentSuccess, SettlePayment } from '../features/payment';
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 
@@ -22,6 +22,8 @@ const DashboardStack = () => {
             <Stack.Screen name={RouteName.PAYMENT_SUCCESS} component={PaymentSuccess} />
             <Stack.Screen name={RouteName.SETTLE_PAYMENT} component={SettlePayment} />
             <Stack.Screen name={RouteName.BOOK_CARDAVAILABLE_SLOTS} component={CardBookingAvailableSlots} />
+            <Stack.Screen name={RouteName.BOOK_CARDCONFIRM} component={CardBookConfirm} />
+            <Stack.Screen name={RouteName.BOOK_CARDSUCCEESS} component={CardBookingSuccess} />
 
             {/* <Stack.Screen name={RouteName.ADD_PAYMENT} component={AddPaymentDetails} /> */}
             {/* <Stack.Screen name={RouteName.STORY_LIST} component={StoryList} /> */}

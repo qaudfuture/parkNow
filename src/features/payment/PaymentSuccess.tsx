@@ -4,29 +4,20 @@ import { Container, TopContainer, BottomContainer, Image } from './PaymentDetail
 import { Images } from '../../resources/images';
 import { DashbaordStackScreenProp } from '../../routes/type';
 import { RouteName } from '../../routes/routeName';
+import { useAppDispatch } from '../../hooks';
+import { SettlePaymentActions } from '../payment';
 // import { useFocusEffect } from '@react-navigation/native';
 // import { transactionSelector, TranasactionsHistory } from '../../constants/featureList';
 export type PaymentSuccesssProp = DashbaordStackScreenProp<RouteName.PAYMENT_SUCCESS>;
 
 const PaymentSuccess: React.FC<PaymentSuccesssProp> = (props: PaymentSuccesssProp) => {
     const { navigation } = props;
-    navigation.setOptions({ tabBarVisible: true });
+    const dispatch = useAppDispatch();
 
-    // const [amount, setAddAmount] = useState<string>('0.0');
-    // const handleInputChange = (text: string) => {
-    //     setAddAmount(text);
-    // };
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         // Show the bottom tabs when this screen is focused
-    //         navigation.setOptions({ tabBarVisible: true });
-
-    //         return () => {
-    //             // Hide the bottom tabs when leaving this screen
-    //             navigation.setOptions({ tabBarVisible: false });
-    //         };
-    //     }, []),
-    // );
+    const _onClickSuccessButton = () => {
+        dispatch(SettlePaymentActions.clear());
+        navigation.navigate(RouteName.DASHBOARD);
+    };
     return (
         <Layout.Base>
             <DashBoardHeader title='Payments Success' showBackButton={true} />
@@ -52,7 +43,7 @@ const PaymentSuccess: React.FC<PaymentSuccesssProp> = (props: PaymentSuccesssPro
                             width: '90%',
                             alignSelf: 'center',
                         }}
-                        // onPressButton={_OnClickPay}
+                        onPressButton={_onClickSuccessButton}
                     />
                 </BottomContainer>
             </Container>

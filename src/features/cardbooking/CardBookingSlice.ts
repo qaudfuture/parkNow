@@ -6,6 +6,9 @@ type CardBookingState = {
     data?: unknown;
     error?: unknown;
     showToast: boolean;
+    isCardBookloading: boolean;
+    isCardBookdata?: unknown;
+    isCardBookerror?: unknown;
 };
 
 const initialState: CardBookingState = {
@@ -13,6 +16,9 @@ const initialState: CardBookingState = {
     error: undefined,
     data: undefined,
     showToast: false,
+    isCardBookloading: false,
+    isCardBookdata: undefined,
+    isCardBookerror: undefined,
 };
 
 const cardBookingReducer = createSlice({
@@ -20,6 +26,7 @@ const cardBookingReducer = createSlice({
     initialState,
     reducers: {
         request(state: CardBookingState) {
+            //action: PayloadAction
             return { ...state, loading: true };
         },
         success(state: CardBookingState, action: PayloadAction<unknown>) {
@@ -29,6 +36,17 @@ const cardBookingReducer = createSlice({
             return { ...state, loading: false, error: action.payload, showToast: true };
         },
         clear: () => initialState,
+        requestCardBooking(state: CardBookingState) {
+            //action: PayloadAction
+            return { ...state, isCardBookloading: true };
+        },
+        successCardBooking(state: CardBookingState, action: PayloadAction<unknown>) {
+            return { ...state, isCardBookloading: false, isCardBookdata: action.payload, showToast: true };
+        },
+        errorCardBooking(state: CardBookingState, action: PayloadAction<unknown>) {
+            return { ...state, isCardBookloading: false, isCardBookerror: action.payload, showToast: true };
+        },
+        clearCardBooking: () => initialState,
     },
 });
 

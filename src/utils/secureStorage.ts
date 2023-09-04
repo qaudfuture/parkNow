@@ -2,6 +2,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 export enum SecureStorageKey {
     ACCESS_TOKEN = 'access-token',
+    USER_DATA = 'user_data',
 }
 
 const set = async (key: SecureStorageKey, value: unknown) => {

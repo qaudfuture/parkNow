@@ -22,4 +22,5 @@ export const Images = {
     pay: require('../images/payment-methodNew.png'),
     success: require('../images/checked.png'),
     loader: require('../images/loader.gif'),
+    booking: require('../images/booking.png'),
 };

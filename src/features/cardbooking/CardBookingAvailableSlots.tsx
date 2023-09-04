@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Layout,
     DashBoardHeader,
@@ -12,17 +12,60 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { DashbaordStackScreenProp } from '../../routes/type';
 import { RouteName } from '../../routes/routeName';
 import { get } from 'lodash';
+import { useAppDispatch } from '../../hooks';
+import { CardBookingActions } from '../cardbooking';
 
 export type AvailableSlotstProps = DashbaordStackScreenProp<RouteName.BOOK_CARDAVAILABLE_SLOTS>;
 
 const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: AvailableSlotstProps) => {
-    // const [cardParkingSlots, setCardParkingSlots] = useState({});
-    // const { navigation } = props;
-    const _OnCardPressed = () => {};
-    const availableSlots = JSON.parse(get(props, ['route', 'params', 'availableSlots']));
+    const { navigation } = props;
+    const dispatch = useAppDispatch();
 
-    console.log('availableSlotsVALUUEU', availableSlots);
-    console.log('availableSlotsVALUUEU', typeof availableSlots);
+    const [cardParkSlots, setCardParkingSlots] = useState<Array>([]);
+
+    const generateId = (slots) => {
+        // Initialize a variable to keep track of the ID
+        let idCounter = 1;
+
+        // Add an ID property to each object in the array
+        for (const obj of slots) {
+            obj.id = idCounter;
+            idCounter++;
+        }
+        setCardParkingSlots(slots);
+    };
+
+    const _OnCardPressed = (startDate: Date, endDate: Date, cardId: number): void => {
+        // let cardBookingArr: {
+        //     time: Date;
+        //     startDate: Date;
+        //     endDate: Date;
+        //     userId: number;
+        //     cardId: number;
+        // }[] = [];
+
+        const existingIndex = cardParkSlots.findIndex(
+            (booking) => booking.startDate === startDate && booking.endDate === endDate && booking.cardId === cardId,
+        );
+        const parkedSlots = JSON.parse(JSON.stringify(cardParkSlots));
+        if (existingIndex !== -1) {
+            parkedSlots.splice(existingIndex, 1);
+            setCardParkingSlots(parkedSlots);
+        } else {
+            const cardBookingSlots = {
+                time: new Date(),
+                startDate: startDate,
+                endDate: endDate,
+                userId: 1,
+                cardId: cardId,
+                parkedLocation: 'Dubai',
+            };
+            parkedSlots.push(cardBookingSlots);
+            generateId(parkedSlots);
+        }
+    };
+
+    const availableSlots = JSON.parse(get(props, ['route', 'params', 'availableSlots']));
 
     const cardParkingSlots =
         Object.keys(availableSlots) != null &&
@@ -32,9 +75,25 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
             data: availableSlots[key],
         }));
 
+    const isCardSelected = (startDate, endDate, cardId) => {
+        return cardParkSlots.some(
+            (cardSelected) =>
+                cardSelected?.startDate === startDate &&
+                cardSelected?.endDate === endDate &&
+                cardSelected?.cardId === cardId,
+        );
+    };
+
+    const _onBookSlots = () => {
+        navigation.navigate(RouteName.BOOK_CARDCONFIRM, { bookedSlots: JSON.stringify(cardParkSlots) });
+    };
+
+    const _onBackButtonPressed = () => {
+        dispatch(CardBookingActions.clearCardBooking);
+    };
+
     const renderItem = ({ item }) => {
         const dateTitle = new Date(item.title);
-
         const year = dateTitle.getUTCFullYear();
         const month = dateTitle.getUTCMonth() + 1;
         const day = dateTitle.getUTCDate();
@@ -47,17 +106,26 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                     {item.data != undefined &&
                         item?.data?.map((cardData) => {
-                            console.log('cardDatacardData', cardData);
+                            console.log('STARTSDATE', cardData.startDate, cardData.endDate);
+
                             const cardStartDate = new Date(cardData.startDate);
                             const cardEndDate = new Date(cardData.endDate);
-                            const periodStartDate = cardData.startDate >= 12 ? 'PM' : 'AM';
-                            const periodEndDate = cardData.endDate >= 12 ? 'PM' : 'AM';
+                            const periodStartDate = cardStartDate.getTime() >= 12 ? 'PM' : 'AM';
+                            const periodEndDate = cardEndDate.getTime() >= 12 ? 'PM' : 'AM';
+                            const isBooked = isCardSelected(cardData.startDate, cardData.endDate, cardData.cardId);
                             return (
                                 <>
                                     <Spacer size='sm' />
                                     <AvailableCards
-                                        onPress={() => _OnCardPressed(item)}
-                                        color='rgba(254, 216, 77, 0.2)'
+                                        onPress={() =>
+                                            _OnCardPressed(
+                                                cardData.startDate,
+                                                cardData.endDate,
+                                                cardData.cardId,
+                                                item.title,
+                                            )
+                                        }
+                                        color={isBooked ? 'green' : 'rgba(254, 216, 77, 0.2)'}
                                         style={{ alignItems: 'center', marginVertical: 10 }}>
                                         <Text variant='title' style={{ color: '#FAB41B', fontSize: 16 }}>
                                             {cardStartDate.getUTCHours()}
@@ -76,7 +144,7 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
 
     return (
         <Layout.Base>
-            <DashBoardHeader title='Book Card' />
+            <DashBoardHeader title='Book Card' onBackButtonPressd={_onBackButtonPressed} />
             <Spacer size='sm' />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <RegisterProgressIndicator isLastScreen={true} width='30%' />
@@ -100,9 +168,9 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
             />
             <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button
-                    title='Check Availability'
+                    title='Book'
                     buttonStyles={{ backgroundColor: '#FED94D', width: '90%', alignSelf: 'center' }}
-                    onPressButton={() => {}}
+                    onPressButton={_onBookSlots}
                 />
             </View>
 

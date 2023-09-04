@@ -10,7 +10,6 @@ import {
     Loader,
 } from '../../components';
 import { get } from 'lodash';
-
 import { View } from 'react-native';
 import { CardBookingActions } from '../cardbooking';
 import { DashbaordStackScreenProp } from '../../routes/type';
@@ -46,7 +45,6 @@ const CardBooking: React.FC<CardBookingPros> = (navigationProps) => {
     const data = get(cardBookingSlots, 'data');
     const isLoading = get(cardBookingSlots, 'loading', false);
     // const error = get(cardBookingSlots, 'error');
-    console.log('DATATTAA', data);
 
     const getPayLoad = () => {
         const selectedType = selectedDates.length;
@@ -107,13 +105,6 @@ const CardBooking: React.FC<CardBookingPros> = (navigationProps) => {
                 Select your date
             </Text>
             <Spacer size='md' />
-
-            {/* <View>
-                <TransactionSelector data={bookSelector} onPress={_onSelectedBookingType} />
-            </View>
-            <Spacer size='sm' /> */}
-
-            {/* <DatePicker onDatesSelect={handleDatesSelect} /> */}
             <DatePicker onSingleDaySelect={handleSingleDaySelect} onMultipleDaysSelect={handleMultipleDaysSelect} />
             <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button

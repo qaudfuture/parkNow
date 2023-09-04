@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import AppNavigator from '../routes';
-// import { Loader } from '@TopStories/Component';
+import { Loader } from '../components/loader';
+
 // import { navigationRef } from '../routes/services';
 import SplashScreen from 'react-native-splash-screen';
 import { useIsLoggedIn } from '../hooks';
-import { setGlobalBaseUrl, setGlobalHeader } from '../network/axios';
+import { setGlobalBaseUrl } from '../network/axios';
 import { NETWORK_CONST } from '../network/contants';
-
+//setGlobalHeader accessToken
 const Setup: React.FC = () => {
-    const { isLoggedIn, accessToken } = useIsLoggedIn();
+    const { isLoggedIn, isLoading } = useIsLoggedIn();
 
     useEffect(() => {
         setTimeout(() => {
@@ -16,10 +17,10 @@ const Setup: React.FC = () => {
         }, 2000);
     }, []);
 
-    // if (isLoading) return <Loader />;
+    if (isLoading) return <Loader />;
 
     if (isLoggedIn) {
-        setGlobalHeader(accessToken);
+        // setGlobalHeader(accessToken);
         setGlobalBaseUrl(NETWORK_CONST.BASE_URL);
     }
 

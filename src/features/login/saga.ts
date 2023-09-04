@@ -3,7 +3,7 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './LoginSlice';
 import { SecureStorageKey, SecureUtils } from '../../utils/secureStorage';
-import { setGlobalBaseUrl } from '../../network/axios';
+import { setGlobalBaseUrl, setGlobalHeader } from '../../network/axios';
 import { NETWORK_CONST } from '../../network/contants';
 import { SetLoginAuthProps } from '../../hooks/useAuth';
 
@@ -36,13 +36,14 @@ export function* loginRequestSagaWorker({ payload }: ReturnType<typeof request>)
         console.log('Loginresponse', data, status);
 
         if (status === 200) {
-            const { token = '' } = data as ResponseData;
+            const { token = '', user = {} } = data as ResponseData;
 
-            console.log('access_token', token);
+            console.log('access_token', user);
             if (token) {
                 setGlobalBaseUrl(NETWORK_CONST.BASE_URL);
-                // setGlobalHeader(token);
+                setGlobalHeader(token);
                 SecureUtils.set(SecureStorageKey.ACCESS_TOKEN, token);
+                SecureUtils.set(SecureStorageKey.USER_DATA, JSON.stringify(user));
             }
         }
         yield put(success(response.data));
