@@ -7,7 +7,6 @@ export const HeaderContainer = styled.View`
 
 export const LeftContainer = styled.TouchableOpacity`
     position: absolute;
-    left: 10px;
     padding: 5px;
 `;
 //background - color: ${ theme.colors.primary };
@@ -22,7 +21,7 @@ export const SignInButton = styled.TouchableOpacity`
     right: 10px;
     padding: 10px;
     border-radius: 30px;
-    border: 1px solid #eaebec;
+    border: 1px solid ${({ theme }) => theme.colors.lightgray};
     align-self: flex-end;
 `;
 

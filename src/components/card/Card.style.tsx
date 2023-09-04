@@ -3,9 +3,9 @@ import styled from 'styled-components/native';
 export const CardContainer = styled.View`
     justify-content: center;
     align-items: center;
-    border: 2px solid #eaebec;
+    border: 2px solid ${({ theme }) => theme.colors.lightgray};
     border-radius: 10px;
-    background-color: lightgray;
+    background-color: ${({ theme }) => theme.colors.gray};
     height: 30%;
 `;
 

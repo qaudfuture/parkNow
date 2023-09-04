@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Text, TextStyle } from 'react-native';
-import { FontFamily } from '../../constants/fontFamily';
+// import { FontFamily } from '../../constants/fontFamily';
 
 // Define your typography styles here
 const typographyStyles = {
     header: {
         fontSize: 24,
         fontWeight: 'bold',
-        fontFamily: FontFamily.BOLD,
+        // fontFamily: FontFamily.BOLD,
         // Add any other common styles for headers
     },
     title: {

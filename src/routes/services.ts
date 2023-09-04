@@ -4,10 +4,11 @@ import { RouteName } from './routeName';
 export const navigationRef = createNavigationContainerRef();
 
 const isReady = () => navigationRef.isReady();
-const canGoBackScreen = () => navigationRef.isReady() && navigationRef.canGoBack();
-const goBack = () => canGoBackScreen() && navigationRef.goBack();
+const canGoBack = () => navigationRef.isReady() && navigationRef.canGoBack();
+const goBack = () => canGoBack() && navigationRef.goBack();
 
 const navigate = (routeName: string, params = {}) => {
+    console.log('************** navigate', routeName);
     navigationRef.dispatch(
         CommonActions.navigate({
             name: routeName,
@@ -47,6 +48,6 @@ export const RouteService = {
     navigateAndReset,
     navigate,
     isReady,
-    canGoBackScreen,
+    canGoBack,
     goBack,
 };

@@ -6,13 +6,23 @@ export enum RouteName {
     DASHBOARD_STACK = 'Dashboard_Stack',
     DASHBOARD = 'Home',
     BOOK_CARD = 'Book_card',
+    BOOK_CARDAVAILABLE_SLOTS = 'CardBookingAvailableSlots',
+    BOOK_CARDCONFIRM = 'CardBookConfirm',
+    BOOK_CARDSUCCEESS = 'CardBookingSuccess',
+
     USED_CARDS = 'Used_cards',
     PARK_CAR = 'Park_car',
+
+    PAYMENT_DETAILS = 'PaymentDetails',
+    ADD_PAYMENT = 'AddPayment',
+    PAYMENT_SUCCESS = 'PaymentSuceess',
+
+    SETTLE_PAYMENT = 'SettlePayment',
 
     //Login Stack
 
     LOGIN = 'Login',
-    REGISTER = 'register',
+    REGISTER = 'Register',
     REGISTERUPLOAD = 'registerimage',
 
     //FIND_MY_CAR Stack

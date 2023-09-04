@@ -1,17 +1,15 @@
-import React from 'react';
-import { CommonActions, NavigationContainerRef, StackActions } from '@react-navigation/native';
+import { CommonActions, createNavigationContainerRef } from '@react-navigation/native';
 import { RouteName } from './routeName';
 
-export type NavigationRefType = React.MutableRefObject<NavigationContainerRef<typeof RouteName>>;
+export const navigationRef = createNavigationContainerRef();
 
-let _navigator: NavigationRefType;
-
-const setTopLevelNavigator = (navigatorRef: NavigationRefType) => {
-    _navigator = navigatorRef;
-};
+const isReady = () => navigationRef.isReady();
+const canGoBack = () => navigationRef.isReady() && navigationRef.canGoBack();
+const goBack = () => canGoBack() && navigationRef.goBack();
 
 const navigate = (routeName: string, params = {}) => {
-    _navigator?.current.dispatch(
+    console.log('************** navigate', routeName);
+    navigationRef.dispatch(
         CommonActions.navigate({
             name: routeName,
             params,
@@ -19,34 +17,37 @@ const navigate = (routeName: string, params = {}) => {
     );
 };
 
-const goToTopOfStack = () => {
-    _navigator?.current.dispatch(StackActions.popToTop());
-};
-
-const popToTopThenNavigate = (route: string, params = {}) => {
-    if (_navigator?.current.canGoBack()) {
-        _navigator?.current.dispatch(StackActions.popToTop());
+const navigateAndReset = (routes = [], index = 0) => {
+    if (navigationRef.isReady()) {
+        navigationRef.dispatch(
+            CommonActions.reset({
+                index,
+                routes: routes.map((route) => ({ name: route })),
+            }),
+        );
     }
-    if (route) navigate(route, params);
 };
 
-const popToTopThenPopAndNavigate = (route: string, params = {}) => {
-    if (_navigator?.current.canGoBack()) {
-        _navigator?.current.dispatch(StackActions.popToTop());
-        _navigator?.current.dispatch(StackActions.pop());
-    }
-    if (route) navigate(route, params);
+const navWithReset = (params = {}, navTo = RouteName.DASHBOARD) => {
+    navigationRef.dispatch(
+        CommonActions.reset({
+            index: 0,
+            key: navTo,
+            routes: [
+                {
+                    name: navTo,
+                    params,
+                },
+            ],
+        }),
+    );
 };
 
-const goBackToPreviousRoute = () => {
-    _navigator?.current.dispatch(StackActions.pop());
-};
-
-export const NavigationService = {
-    setTopLevelNavigator,
+export const RouteService = {
+    navWithReset,
+    navigateAndReset,
     navigate,
-    goToTopOfStack,
-    popToTopThenNavigate,
-    popToTopThenPopAndNavigate,
-    goBackToPreviousRoute,
+    isReady,
+    canGoBack,
+    goBack,
 };

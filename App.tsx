@@ -5,22 +5,32 @@
  * @format
  * @flow strict-local
  */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import AppNavigator from './src/routes/index';
-import SplashScreen from 'react-native-splash-screen';
-import { store } from './src/store/redux';
+import { Appearance } from 'react-native';
+import { ThemeProvider } from 'styled-components';
+import { store, persistor } from './src/store';
+import { getSelectedTheme } from './src/theme';
+import { ErrorBoundry } from './src/components';
+import Setup from './src/setup';
+import { PersistGate } from 'redux-persist/integration/react';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
 const App: React.FC = () => {
-    useEffect(() => {
-        SplashScreen.hide();
-    }, []);
+    const colorScheme = Appearance.getColorScheme();
+    const theme = getSelectedTheme(colorScheme);
+
     return (
-        <Provider store={store}>
-            <AppNavigator isLoggedIn={false} />
-        </Provider>
+        <ErrorBoundry>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <ThemeProvider theme={theme}>
+                        <Setup />
+                    </ThemeProvider>
+                </PersistGate>
+            </Provider>
+        </ErrorBoundry>
     );
 };
 export default App;
