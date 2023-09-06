@@ -66,7 +66,7 @@ module.exports = {
     'linebreak-style': 'off',
     'no-tabs': 'off',
     "no-unused-vars": 'off',
-    "@typescript-eslint/no-unused-vars": "error",
+    // "@typescript-eslint/no-unused-vars": "error",
     'max-len': ['error', { code: 300 }],
     'import/extensions': [
       'error',

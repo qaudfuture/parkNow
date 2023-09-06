@@ -10,6 +10,8 @@ export enum RouteName {
     BOOK_CARDCONFIRM = 'CardBookConfirm',
     BOOK_CARDSUCCEESS = 'CardBookingSuccess',
 
+    BOOKING_DETAILS = 'BookingDetails',
+
     USED_CARDS = 'Used_cards',
     PARK_CAR = 'Park_car',
 

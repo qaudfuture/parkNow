@@ -1,55 +1,58 @@
-import React, { useEffect } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import Animated, { SlideInDown, SlideOutDown } from 'react-native-reanimated';
+import React, { useEffect, useRef } from 'react';
+import { Animated, Dimensions, TouchableOpacity, Text } from 'react-native';
+// import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Container, ToastView, Row, CustomText, SubText } from './CustomToast.style';
+import { CustomToastProps } from './type';
 
-// Styles
-import { styles } from './CustomToast.style';
+const CustomToast: React.FC<CustomToastProps> = ({ status, instantPopOut }) => {
+    const windowHeight = Dimensions.get('window').height;
+    const popAnim = useRef(new Animated.Value(windowHeight * -1)).current;
 
-interface ToastNotificationProps {
-    duration: number;
-    text: string;
-    textStyle?: any;
-    style?: any;
-    onPress?: () => void;
-    onHide: () => void;
-}
-const ToastNotification = ({ duration, text, textStyle, style, onPress, onHide }: ToastNotificationProps) => {
-    // Component Life Cycles
     useEffect(() => {
-        if (duration) {
-            const closeTimer = setTimeout(() => {
-                _hideToast();
-            }, duration);
-            return () => {
-                clearTimeout(closeTimer);
-            };
+        if (status) {
+            Animated.timing(popAnim, {
+                toValue: 0, // Translate the view to the top
+                duration: 100,
+                useNativeDriver: true,
+            }).start(() => {
+                setTimeout(() => {
+                    instantPopOut();
+                }, 10000);
+            });
+        } else {
+            // Hide the toast when status is null
+            Animated.timing(popAnim, {
+                toValue: windowHeight * -1, // Translate the view back out of sight
+                duration: 100,
+                useNativeDriver: true,
+            }).start();
         }
-    }, []);
+    }, [status, popAnim, instantPopOut, windowHeight]);
 
-    // Component Functions
+    const successColor = '#6dcf81';
+    const failColor = '#bf6060';
 
-    const _hideToast = () => {
-        if (onHide) {
-            onHide();
-        }
-    };
-
-    // const finalPosition = isTop ? { top: 100 } : { bottom: 100 };
     return (
-        <TouchableOpacity disabled={!onPress} onPress={() => onPress && onPress()}>
-            <Animated.View
-                style={{
-                    ...styles.container,
-                    ...style,
-                }}
-                entering={SlideInDown.duration(750)}
-                exiting={SlideOutDown.duration(500)}>
-                <Text style={[styles.text, textStyle]} numberOfLines={2}>
-                    {text}
-                </Text>
-            </Animated.View>
-        </TouchableOpacity>
+        <Container style={{ transform: [{ translateY: popAnim }] }}>
+            {status && (
+                <ToastView backgroundColor={status === 'success' ? successColor : failColor}>
+                    <Row>
+                        {/* <FontAwesome
+                            name={status === 'success' ? 'checkcircleo' : 'closecircleo'}
+                            size={24}
+                            color='white'
+                        /> */}
+                        <CustomText color='white'>{status === 'success' ? 'Success!' : 'Failed!'}</CustomText>
+                        <SubText color='white'>{status === 'success' ? 'success' : 'Operation Failed...'}</SubText>
+                        <TouchableOpacity onPress={instantPopOut}>
+                            <Text>Close</Text>
+                            {/* <FontAwesome name='cross' size={24} color='white' /> */}
+                        </TouchableOpacity>
+                    </Row>
+                </ToastView>
+            )}
+        </Container>
     );
 };
 
-export default ToastNotification;
+export default CustomToast;

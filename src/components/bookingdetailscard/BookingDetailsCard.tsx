@@ -7,6 +7,7 @@ import {
 } from './BookingDetailsCard.style';
 import { FlatList } from 'react-native';
 import { Spacer, Text } from '../../components';
+import { localTime } from '../../utils/dateUtils';
 import { BookingDetailProps, BookingDetailListProps } from './type';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -23,13 +24,10 @@ const BookingDetail: React.FC<BookingDetailProps> = ({
         const year = dateTitle.getUTCFullYear();
         const month = dateTitle.getUTCMonth() + 1;
         const day = dateTitle.getUTCDate();
-        const endDate = new Date(item.endDate);
-        const starthours = dateTitle.getUTCHours();
-        const startminutes = dateTitle.getUTCMinutes();
-        const endhours = endDate.getUTCHours();
-        const endminutes = endDate.getUTCMinutes();
-        const periodStartDate = starthours >= 12 ? 'PM' : 'AM';
-        const periodEndDate = endhours >= 12 ? 'PM' : 'AM';
+
+        const startTime = localTime(item.startDate);
+        const endTime = localTime(item.endDate);
+
         return (
             <>
                 <Spacer size='xs' />
@@ -42,7 +40,7 @@ const BookingDetail: React.FC<BookingDetailProps> = ({
                             </Text>
                             <Spacer size='xs' />
                             <Text variant='title' style={{ fontSize: 12 }}>
-                                {starthours}:{startminutes} {periodStartDate} - {endhours}:{endminutes} {periodEndDate}
+                                {startTime} - {endTime}
                             </Text>
                         </LeftPreviousBookingUserContainer>
                     </LeftInnerContainer>

@@ -7,13 +7,17 @@ import {
     Spacer,
     Button,
     RegisterProgressIndicator,
+    Image,
+    ImageVariant,
 } from '../../components';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { DashbaordStackScreenProp } from '../../routes/type';
 import { RouteName } from '../../routes/routeName';
 import { get } from 'lodash';
+import { Images } from '../../resources/images';
 import { useAppDispatch } from '../../hooks';
 import { CardBookingActions } from '../cardbooking';
+import { localTime } from '../../utils/dateUtils';
 
 export type AvailableSlotstProps = DashbaordStackScreenProp<RouteName.BOOK_CARDAVAILABLE_SLOTS>;
 
@@ -35,6 +39,8 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
         setCardParkingSlots(slots);
     };
 
+    // const [cardParkingSlots, setCardParkingSlots] = useState({});
+    // const { navigation } = props;
     const _OnCardPressed = (startDate: Date, endDate: Date, cardId: number): void => {
         // let cardBookingArr: {
         //     time: Date;
@@ -64,7 +70,6 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
             generateId(parkedSlots);
         }
     };
-
     const availableSlots = JSON.parse(get(props, ['route', 'params', 'availableSlots']));
 
     const cardParkingSlots =
@@ -74,7 +79,6 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
             title: key,
             data: availableSlots[key],
         }));
-
     const isCardSelected = (startDate, endDate, cardId) => {
         return cardParkSlots.some(
             (cardSelected) =>
@@ -91,27 +95,23 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
     const _onBackButtonPressed = () => {
         dispatch(CardBookingActions.clearCardBooking);
     };
-
     const renderItem = ({ item }) => {
         const dateTitle = new Date(item.title);
+
         const year = dateTitle.getUTCFullYear();
         const month = dateTitle.getUTCMonth() + 1;
         const day = dateTitle.getUTCDate();
 
         return (
             <View style={styles.item}>
-                <Text variant='header' style={styles.headerText}>
+                <Text variant='title' style={styles.headerText}>
                     {year}-{month}-{day}
                 </Text>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                     {item.data != undefined &&
                         item?.data?.map((cardData) => {
-                            console.log('STARTSDATE', cardData.startDate, cardData.endDate);
-
-                            const cardStartDate = new Date(cardData.startDate);
-                            const cardEndDate = new Date(cardData.endDate);
-                            const periodStartDate = cardStartDate.getTime() >= 12 ? 'PM' : 'AM';
-                            const periodEndDate = cardEndDate.getTime() >= 12 ? 'PM' : 'AM';
+                            const startTime = localTime(cardData.startDate);
+                            const endTime = localTime(cardData.endDate);
                             const isBooked = isCardSelected(cardData.startDate, cardData.endDate, cardData.cardId);
                             return (
                                 <>
@@ -126,11 +126,9 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
                                             )
                                         }
                                         color={isBooked ? 'green' : 'rgba(254, 216, 77, 0.2)'}
-                                        style={{ alignItems: 'center', marginVertical: 10 }}>
-                                        <Text variant='title' style={{ color: '#FAB41B', fontSize: 16 }}>
-                                            {cardStartDate.getUTCHours()}
-                                            {periodStartDate} - {cardEndDate.getUTCHours()}
-                                            {periodEndDate}
+                                        style={{ alignItems: 'center', marginVertical: 10, width: '48%' }}>
+                                        <Text variant='body' style={{ color: '#FAB41B', fontSize: 10 }}>
+                                            {startTime} - {endTime}
                                         </Text>
                                     </AvailableCards>
                                     <Spacer size='sm' />
@@ -141,6 +139,7 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
             </View>
         );
     };
+    console.log('CARDBOOKINGSLOT', JSON.stringify(cardParkingSlots));
 
     return (
         <Layout.Base>
@@ -166,14 +165,20 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
             />
-            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                <Button
-                    title='Book'
-                    buttonStyles={{ backgroundColor: '#FED94D', width: '90%', alignSelf: 'center' }}
-                    onPressButton={_onBookSlots}
-                />
-            </View>
-
+            {cardParkingSlots != undefined && cardParkingSlots.length == 0 ? null : (
+                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                    <Button
+                        title='Book'
+                        buttonStyles={{ backgroundColor: '#FED94D', width: '90%', alignSelf: 'center' }}
+                        onPressButton={_onBookSlots}
+                    />
+                </View>
+            )}
+            {cardParkingSlots != undefined && cardParkingSlots.length == 0 && (
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Image variant={ImageVariant.ExtraLarge} source={Images.noBookings} />
+                </View>
+            )}
             <Spacer size='xl' />
             <Spacer size='md' />
         </Layout.Base>

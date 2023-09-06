@@ -27,3 +27,25 @@ export const formatattedTime = (utcDate) => {
     const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     return formattedTime;
 };
+
+export const localTime = (datetime: string) => {
+    const date = new Date(datetime);
+    // Create a Date object
+    const dateObject = new Date(date.toString());
+    // Extract the time components
+    const hours = dateObject.getHours();
+    const minutes = dateObject.getMinutes();
+    // const seconds = dateObject.getSeconds();
+
+    // Determine whether it's AM or PM
+    const amOrPm = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert hours to 12-hour format
+    const formattedHours = hours % 12 || 12;
+
+    // Format the time as a string (hh:mm:ss AM/PM)
+    const formattedTime = `${formattedHours.toString().padStart(2, '0')}:${minutes
+        .toString()
+        .padStart(2, '0')} ${amOrPm}`;
+    return formattedTime;
+};

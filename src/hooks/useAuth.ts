@@ -12,6 +12,7 @@ export type SetLoginProps = {
     contactNumber: number;
     carNumber: string;
     imageS3Link: string;
+    DeviceId: string;
     createdDate: string;
     updatedDate: string;
 };
@@ -28,6 +29,7 @@ const useAuth = () => {
     const authData = useAppSelector((state) => state.auth);
     const loginData = get(authData, 'login');
     const registrationData = get(authData, 'registration');
+    console.log('registrationData', registrationData);
 
     const accesToken = get(loginData, ['data', 'token'], false);
 
@@ -47,6 +49,7 @@ const useAuth = () => {
         carNumber,
         contactNumber,
         imageS3Link,
+        DeviceId,
         createdDate,
         updatedDate,
     }: SetLoginProps) => {
@@ -59,6 +62,7 @@ const useAuth = () => {
                 carNumber,
                 contactNumber,
                 imageS3Link,
+                DeviceId,
                 createdDate,
                 updatedDate,
             }),

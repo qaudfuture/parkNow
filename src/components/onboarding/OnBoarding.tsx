@@ -14,7 +14,7 @@ const OnBoardingComp: React.FC<OnBoardingProps> = ({ onClickLogin, onClickRegist
     const scrollX = useRef(new Animated.Value(0)).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
     return (
-        <View style={{ flex: 1, marginVertical: 10 }}>
+        <View style={{ flex: 1, marginVertical: 10, backgroundColor: '#FFF' }}>
             <Animated.FlatList
                 data={constantItems}
                 renderItem={({ item }) => <OnBoardingItem item={item} />}
@@ -30,12 +30,12 @@ const OnBoardingComp: React.FC<OnBoardingProps> = ({ onClickLogin, onClickRegist
                 })}
                 scrollEventThrottle={32}
             />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: 'black' }}>
-                <Button title='Sign up' buttonStyles={{ backgroundColor: '#FFF' }} onPressButton={onClickLogin} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: '#FFF' }}>
+                <Button title='Sign up' buttonStyles={{ backgroundColor: '#FED94D' }} onPressButton={onClickRegister} />
                 <Button
                     title='Login'
-                    buttonStyles={{ backgroundColor: '#FFF', width: '60%' }}
-                    onPressButton={onClickRegister}
+                    buttonStyles={{ backgroundColor: '#FED94D', width: '60%' }}
+                    onPressButton={onClickLogin}
                 />
                 <Indicator scrollX={scrollX} />
             </View>

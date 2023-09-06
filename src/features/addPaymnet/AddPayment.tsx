@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { PaymentActions } from '../payment';
 import { get } from 'lodash';
 import { TextInputContainer, ButtonContainer } from './AddPayment.style';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useIsLoggedIn } from '../../hooks';
 import { DashbaordStackScreenProp } from '../../routes/type';
 import { RouteName } from '../../routes/routeName';
 export type PaymentDetailsProp = DashbaordStackScreenProp<RouteName.ADD_PAYMENT>;
@@ -16,19 +16,23 @@ const AddPayment: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp) => 
     const handleInputChange = (text: string) => {
         setAddAmount(text);
     };
+    const { user, userloading } = useIsLoggedIn();
+    console.log('USERDATTATATA', user);
     const paymentStatus = useAppSelector((state) => state.payments.addpayment);
     const dataStatus = get(paymentStatus, 'addPaymentdata');
     const isLoading = get(paymentStatus, 'addPaymentloading', false);
 
     const _OnClickPay = () => {
-        const payment = {
-            amount: amount,
-            date: new Date(),
-            payerUserId: 1,
-            createdDate: new Date(),
-            modifiedDate: new Date(),
-        };
-        dispatch(PaymentActions.requestaddPayment(payment));
+        if (user && !userloading) {
+            const payment = {
+                amount: amount,
+                date: new Date(),
+                payerUserId: user?.id,
+                createdDate: new Date(),
+                modifiedDate: new Date(),
+            };
+            dispatch(PaymentActions.requestaddPayment(payment));
+        }
     };
 
     useEffect(() => {

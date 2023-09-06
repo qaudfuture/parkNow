@@ -17,6 +17,7 @@ import { RouteName } from '../../routes/routeName';
 import { get } from 'lodash';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CardBookingActions } from '../cardbooking';
+// import { localTime } from '../../utils/dateUtils';
 
 export type BookCardConfirmProps = DashbaordStackScreenProp<RouteName.BOOK_CARDCONFIRM>;
 
@@ -97,59 +98,62 @@ const CardBookConfirm: React.FC<BookCardConfirmProps> = (props: BookCardConfirmP
         return formattedTime;
     }
 
-    // function addHours(date, hours) {
-    //     date.setHours(date.getHours() + hours);
-    //     return date;
-    // }
+    const combineDateAndTime = (dateString, timeString) => {
+        // Date and time components
+        const date = dateString;
+        const time = timeString;
 
-    function combineDateAndTime(dateString, timeString) {
-        const dateParts = dateString.split('-');
-        const timeParts = timeString.split(':');
+        // Combine date and time with 'T' in between
+        const combinedDateTime = date + 'T' + time;
 
-        const year = parseInt(dateParts[0], 10);
-        const month = parseInt(dateParts[1], 10) - 1; // Months are zero-based
-        const day = parseInt(dateParts[2], 10);
-
-        const hours = parseInt(timeParts[0], 10);
-        const minutes = parseInt(timeParts[1], 10);
-        const seconds = parseInt(timeParts[2], 10);
-
-        return new Date(year, month, day, hours, minutes, seconds);
-    }
+        return combinedDateTime;
+    };
 
     function updateBookedSlotValue<T>(bookedSlots: T[], bookedSlot: T, idKey: keyof T): T[] {
         return bookedSlots.map((obj) => (obj[idKey] === bookedSlot[idKey] ? bookedSlot : obj));
     }
 
-    // Function to remove the "id" property from each object
-    function removeIdFromObjects<T extends Record<string, any>>(array: T[]): Omit<T, 'id'>[] {
-        return array.map((obj) => {
-            const { ...rest } = obj;
-            return rest;
-        });
-    }
+    const bookingSlots = bookingDetails?.map((obj) => {
+        // Create a copy of the object without the 'id' property
+        const { id, ...newObj } = obj;
+        console.log('id', id);
+        return newObj;
+    });
 
     // Call the function to remove "id" from each object
-
     const onTimeChanged = (changedtime: Date, timeType: string) => {
-        const separatedTime = separateTimeFromUTC(changedtime);
+        const originalTimestamp = changedtime;
+
+        // Parse the original timestamp into a Date object
+        const originalDate = new Date(originalTimestamp);
+
+        // Add 4 hours to the Date object
+        originalDate.setHours(originalDate.getHours() + 4);
+
+        // Format the adjusted date and time back into ISO 8601 format
+        const formattedTimestamp = originalDate.toISOString();
+        const separatedTime = separateTimeFromUTC(formattedTimestamp);
+        console.log('separatedTime', separatedTime, separatedTime);
         const bookedSlot = JSON.parse(JSON.stringify(selectedBooking));
+        console.log('separatedTime', bookedSlot);
         if (timeType == 'START') {
             const separatedDate = separateDateFromUTC(bookedSlot.startDate);
+            console.log('separatedTime', separatedDate, separatedTime);
+
             const combinedDateTime = combineDateAndTime(separatedDate, separatedTime);
-            const selectedDate = new Date(combinedDateTime);
-            // const newDate = addHours(selectedDate, 8);
-            bookedSlot.startDate = selectedDate;
+            // const selectedDate = new Date(combinedDateTime);
+            bookedSlot.startDate = combinedDateTime;
+            console.log('COMBINEDATE', combinedDateTime);
             setSelectedBooking(bookedSlot);
             const updatedSlot = updateBookedSlotValue(bookedSlots, bookedSlot, 'id');
-            console.log('updatedSlot', updatedSlot);
+            console.log('COMBINEDATE222', updatedSlot);
             setbookingDetails(updatedSlot);
         } else {
             const separatedDate = separateDateFromUTC(bookedSlot.endDate);
             const combinedDateTime = combineDateAndTime(separatedDate, separatedTime);
-            const selectedDate = new Date(combinedDateTime);
+
             // const newDate = addHours(selectedDate, 8);
-            bookedSlot.endDate = selectedDate;
+            bookedSlot.endDate = combinedDateTime;
             setSelectedBooking(bookedSlot);
             const updatedSlot = updateBookedSlotValue(bookedSlots, bookedSlot, 'id');
             console.log('updatedSlot', updatedSlot);
@@ -169,8 +173,7 @@ const CardBookConfirm: React.FC<BookCardConfirmProps> = (props: BookCardConfirmP
     }, [dataStatus]);
 
     const _confirmBookingCard = () => {
-        const arrayOfObjectsWithoutId = removeIdFromObjects(bookingDetails);
-        dispatch(CardBookingActions.requestCardBooking(arrayOfObjectsWithoutId));
+        dispatch(CardBookingActions.requestCardBooking(bookingSlots));
     };
 
     if (isLoading) return <Loader />;

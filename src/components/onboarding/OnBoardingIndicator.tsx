@@ -32,7 +32,7 @@ const Indicator: React.FC = ({ scrollX }) => {
                             height: 10,
                             width: 10,
                             borderRadius: 5,
-                            backgroundColor: '#FFF',
+                            backgroundColor: '#FED94D',
                             margin: 10,
                             // transform: [{
                             //     scale: scale

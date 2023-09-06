@@ -16,6 +16,7 @@ export type DashboardStackParamList = {
     [RouteName.BOOK_CARDAVAILABLE_SLOTS]: undefined;
     [RouteName.BOOK_CARDCONFIRM]: undefined;
     [RouteName.BOOK_CARDSUCCEESS]: undefined;
+    [RouteName.BOOKING_DETAILS]: undefined;
     // [RouteName.STORY_LIST]: StoyListPrams;
     // [RouteName.STORY_DETAIL]: StoryDetailsParams;
     // [RouteName.STORY_SEARCH]: undefined;

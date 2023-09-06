@@ -9,7 +9,7 @@ import {
 } from './PreviousBookingCard.style';
 import { Images } from '../../resources/images';
 import { Spacer, Text } from '../../components';
-import { formatattedTime } from '../../utils/dateUtils';
+import { localTime } from '../../utils/dateUtils';
 
 type CurrentBookingItemProps = {
     key?: string | number;
@@ -21,8 +21,8 @@ type CurrentBookingItemProps = {
 const PreviousBookingCard: React.FC<CurrentBookingItemProps> = (props: CurrentBookingItemProps) => {
     const { key = '', name = '', startDate, endDate } = props;
     console.log('STATRTATATA', startDate, endDate);
-    const startBookingtime = formatattedTime(startDate);
-    const endBookingTime = formatattedTime(endDate);
+    const startBookingtime = localTime(startDate);
+    const endBookingTime = localTime(endDate);
 
     return (
         <>

@@ -12,7 +12,9 @@ import {
 import { featureList } from '../../constants/featureList';
 import { DashbaordStackScreenProp } from '../../routes/type';
 import { RouteName } from '../../routes/routeName';
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+
 import {
     DashboardTopCard,
     DashboardTopInnerRightCard,
@@ -24,7 +26,7 @@ import { DashBoardActions } from '../dashboard';
 import { AddPaymentActions } from '../payment';
 
 import { FlatList, Image, View } from 'react-native';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useIsLoggedIn } from '../../hooks';
 import { Images } from '../../resources/images';
 import { getAvailableCards } from '../../utils/usedCard';
 
@@ -33,12 +35,19 @@ export type DashboardProps = DashbaordStackScreenProp<RouteName.DASHBOARD>;
 const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
     const { navigation } = props;
     const dispatch = useAppDispatch();
-
+    const { user, userloading } = useIsLoggedIn();
     const _onClickCard = (screenName: string) => navigation.navigate(screenName);
-    useEffect(() => {
-        dispatch(DashBoardActions.request());
-        dispatch(AddPaymentActions.request({ userId: 23 }));
-    }, []);
+    // useEffect(() => {
+    //     dispatch(DashBoardActions.request());
+    //     dispatch(AddPaymentActions.request({ userId: user?.id }));
+    // }, [user && !userloading]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            dispatch(DashBoardActions.request());
+            dispatch(AddPaymentActions.request({ userId: user?.id }));
+        }, [user && !userloading]),
+    );
     const getCurrentBookings = useAppSelector((state) => state.dashBoard);
     const getPendingPayments = useAppSelector((state) => state.payments.addpayment);
 
@@ -55,7 +64,7 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
 
     const availableCards = getAvailableCards(data);
 
-    if (isLoading || getPendingPaymentisLoading) return <Loader />;
+    if (isLoading || getPendingPaymentisLoading || userloading) return <Loader />;
 
     const _renderCurrentBookingList = () => (
         <CustomCard>
@@ -90,7 +99,7 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
 
     return (
         <Layout.Base>
-            <HomeHeader />
+            <HomeHeader userName={!userloading && user && user.name} />
             <CustomCard color='#FED94D'>
                 <DashboardTopCard>
                     <DashboardTopInnerLeftCard>
@@ -100,7 +109,9 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
                         <Text variant='title'>Available Cards</Text>
                     </DashboardTopInnerLeftCard>
                     <DashboardTopInnerRightCard>
-                        <Text variant='header'>{pendingAmount}</Text>
+                        <Text variant='header'>
+                            {!userloading && user && pendingAmount != undefined ? pendingAmount.toFixed(2) : 'Nan'}
+                        </Text>
                         <Text variant='title'>Pending Balance</Text>
                     </DashboardTopInnerRightCard>
                 </DashboardTopCard>

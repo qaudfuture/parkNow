@@ -4,6 +4,7 @@ import { BottomTabProps } from './type';
 import { View, TouchableOpacity } from 'react-native';
 import { ModalContainer, ModalContent, ModalText } from './BottomModel.style';
 import { getMonthDateAndDay } from '../../utils/dateUtils';
+import { localTime } from '../../utils/dateUtils';
 
 const BottomCard: React.FC<BottomTabProps> = ({
     isVisble,
@@ -13,15 +14,10 @@ const BottomCard: React.FC<BottomTabProps> = ({
     onEndTimeSelected,
 }) => {
     const dateTitle = new Date(selectedCard.startDate);
-    // const day = dateTitle.getUTCDate();
-    const endDate = new Date(selectedCard.endDate);
-    const starthours = dateTitle.getUTCHours();
-    const startminutes = dateTitle.getUTCMinutes();
-    const endhours = endDate.getUTCHours();
-    const endminutes = endDate.getUTCMinutes();
-    const periodStartDate = starthours >= 12 ? 'PM' : 'AM';
-    const periodEndDate = endhours >= 12 ? 'PM' : 'AM';
     const date = getMonthDateAndDay(dateTitle);
+
+    const startTime = localTime(selectedCard.startDate);
+    const endTime = localTime(selectedCard.endDate);
 
     return (
         <ModalContainer isVisible={isVisble} swipeDirection='down' onSwipeComplete={onPress} onBackdropPress={onPress}>
@@ -37,7 +33,7 @@ const BottomCard: React.FC<BottomTabProps> = ({
                         </Text>
                         <Spacer size='xs' />
                         <Text variant='body' style={{ color: 'gray', textAlign: 'right', fontSize: 12 }}>
-                            {starthours} {startminutes}0 {periodStartDate}
+                            {startTime}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -48,7 +44,7 @@ const BottomCard: React.FC<BottomTabProps> = ({
                         </Text>
                         <Spacer size='xs' />
                         <Text variant='body' style={{ color: 'gray', textAlign: 'left', fontSize: 12 }}>
-                            {endhours} : {endminutes}0 {periodEndDate}
+                            {endTime}
                         </Text>
                     </TouchableOpacity>
                 </View>

@@ -14,6 +14,9 @@ import { getSelectedTheme } from './src/theme';
 import { ErrorBoundry } from './src/components';
 import Setup from './src/setup';
 import { PersistGate } from 'redux-persist/integration/react';
+// import { ToastProvider } from './src/components/toast/ToastProvider';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+// Import your ToastProvider component
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -22,15 +25,19 @@ const App: React.FC = () => {
     const theme = getSelectedTheme(colorScheme);
 
     return (
-        <ErrorBoundry>
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <ThemeProvider theme={theme}>
-                        <Setup />
-                    </ThemeProvider>
-                </PersistGate>
-            </Provider>
-        </ErrorBoundry>
+        // <ToastProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <ErrorBoundry>
+                <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <ThemeProvider theme={theme}>
+                            <Setup />
+                        </ThemeProvider>
+                    </PersistGate>
+                </Provider>
+            </ErrorBoundry>
+        </GestureHandlerRootView>
+        // </ToastProvider>
     );
 };
 export default App;

@@ -8,12 +8,10 @@ export const AppImage = styled.Image`
 `;
 
 export const TopContainer = styled.View`
-    flex: 1;
     justify-content: center;
 `;
 
 export const MidContainer = styled.View`
-    flex: 2;
     justify-content: flex-start;
 `;
 

@@ -4,12 +4,12 @@ import { Images } from '../../resources/images';
 import { Spacer, Text } from '../../components';
 
 interface CustomHeaderProps {
-    title: string;
+    userName: string;
     navigation: any; // You can use the correct type from @react-navigation/native
     showBackButton?: boolean;
 }
 
-const HomeHeader: React.FC<CustomHeaderProps> = () => {
+const HomeHeader: React.FC<CustomHeaderProps> = ({ userName }) => {
     return (
         <>
             <Spacer size='md' />
@@ -20,7 +20,7 @@ const HomeHeader: React.FC<CustomHeaderProps> = () => {
                     <Image source={Images.notification} resizeMode='contain' />
                 </ImageContainer>
                 <Spacer size='md' />
-                <Text variant='header'>Hello, Harshavardhan</Text>
+                <Text variant='header'>Hello, {userName}</Text>
             </DashBoardHeaderContainer>
             <Spacer size='md' />
         </>

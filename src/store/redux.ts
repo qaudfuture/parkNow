@@ -5,6 +5,7 @@ import CardBookingReducer from '../features/cardbooking/CardBookingSlice';
 import PaymentReducer from '../features/payment/PaymentSlice';
 import AddPaymentReducer from '../features/payment/AddPaymentSlice';
 import SettlePaymentReducer from '../features/payment/SettlePaymentSlice';
+import BookingDetailsReducer from '../features/bookingdetails/BookingDetailsSlice';
 
 import DashBoardReducer from '../features/dashboard/DashBoardSlice';
 
@@ -22,4 +23,5 @@ export default combineReducers({
         settlePayment: SettlePaymentReducer,
     }),
     dashBoard: DashBoardReducer,
+    bookingDetails: BookingDetailsReducer,
 });

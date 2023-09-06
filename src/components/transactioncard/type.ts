@@ -11,4 +11,5 @@ export interface TransactionCardListProps {
 
 export interface TransactionCardProps {
     data: TransactionCardListProps[] | TransactionCardListProps;
+    loggedInUser: string;
 }
