@@ -1,11 +1,11 @@
-import React from 'react';
-import { Layout, Button, Text, TextInput, Spacer } from '../../components';
+import React, { useState, useEffect } from 'react';
+import { Layout, Button, Text, TextInput, Spacer, CustomToast, Loader } from '../../components';
 import validateForm from '../../hooks/useFormik';
 import { useAuth } from '../../hooks';
-// import { get } from 'lodash';
+import { get } from 'lodash';
 import { AppImage, TopContainer, MidContainer, BottomContainer } from './Login.styles';
 import { Images } from '../../resources/images';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 // import { SecureStorageKey, SecureUtils } from '../utils/secureStorage';
 
@@ -15,27 +15,46 @@ import { ScreenProps } from '../../routes/type';
 export type OnLoginProps = ScreenProps<RouteName.LOGIN>;
 
 const Login: React.FC<OnLoginProps> = (props: OnLoginProps) => {
+    const [status, setStatus] = useState<'success' | 'fail' | null>(null);
+
     // const navigation = useNavigation();
 
     const { navigation } = props;
     const { useLoginForm } = validateForm();
     const { formik, handleFormValidation } = useLoginForm();
+    const _onClickRegister = () => navigation.navigate(RouteName.REGISTER);
 
-    const { dispatchLogin } = useAuth();
+    const { dispatchLogin, loginData } = useAuth();
+
     // const error = get(loginData, ['error']);
-    // const isLoading = get(loginData, ['loading'], false);
+    const isLoading = get(loginData, ['loading'], false);
+    const loggedInData = get(loginData, ['data'], false);
+    const error = get(loginData, ['error'], false);
+
+    useEffect(() => {
+        setStatus('success');
+    }, [loggedInData]);
+
+    useEffect(() => {
+        setStatus('fail');
+    }, [error]);
 
     const _onClickLogin = async () => {
         const validatedData = await handleFormValidation();
         if (validatedData) {
             dispatchLogin({ email: validatedData.email, password: validatedData.password });
-            navigation.navigate(RouteName.LOGIN);
+            // navigation.navigate(RouteName.LOGIN);
         }
     };
-
+    const instantPopOut = () => {
+        setStatus(null);
+    };
+    if (isLoading) return <Loader />;
     return (
         <Layout.Base>
             <TopContainer>
+                <CustomToast status={status} instantPopOut={instantPopOut} />
+
                 <AppImage source={Images.logo} resizeMode='contain' />
                 <Text variant='title' style={styles.textAlign}>
                     Welcome to ParkNow
@@ -77,9 +96,11 @@ const Login: React.FC<OnLoginProps> = (props: OnLoginProps) => {
                     onPressButton={() => _onClickLogin()}
                 />
                 <Spacer size='md' />
-                <Text variant='title' style={styles.subHeaderText}>
-                    You dont have an account?
-                </Text>
+                <TouchableOpacity onPress={_onClickRegister}>
+                    <Text variant='title' style={styles.subHeaderText}>
+                        You dont have an account? Sign up!
+                    </Text>
+                </TouchableOpacity>
             </MidContainer>
             <Spacer size='md' />
             <Text variant='title' style={{ ...styles.subHeaderText, color: 'gray' }}>

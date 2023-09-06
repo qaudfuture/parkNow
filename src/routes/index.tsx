@@ -2,9 +2,6 @@ import React from 'react';
 import { AuthStackNavigator } from './loginStack';
 // import { OnBoardingStackNavigator } from './onboardingStack';
 import { TabNavigator } from './bottomtabStack';
-// import DashboardStack from './homeStack';
-
-// import DashboardStack from './dashbaordStack';
 import { navigationRef } from '../routes/services';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,7 +17,7 @@ const AppNavigator: React.FC<AppNavigatorProps> = (props: AppNavigatorProps) => 
 
     return (
         <NavigationContainer ref={navigationRef}>
-            {isLoggedIn ? <TabNavigator /> : <AuthStackNavigator />}
+            {isLoggedIn ? <TabNavigator /> : <AuthStackNavigator isFirstTimeLoggedIn={true} />}
             {/* <Stack.Navigator
                 screenOptions={{
                     headerShown: false,

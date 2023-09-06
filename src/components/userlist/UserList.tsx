@@ -5,8 +5,7 @@ import { Spacer, Text } from '../../components';
 import { Images } from '../../resources/images';
 import { UserListCardItem, UserListListCardProps } from './type';
 const UserListCard: React.FC<UserListListCardProps> = ({ data, onPress }) => {
-    console.log('UserListCard', data);
-
+    const settleUsers = data.filter((user) => user.amountToSettle > 0);
     const [selectedId, setSelectedId] = useState<number>();
 
     const _onSelectUser = (param: UserListCardItem) => {
@@ -15,6 +14,7 @@ const UserListCard: React.FC<UserListListCardProps> = ({ data, onPress }) => {
     };
     const renderItem = ({ item }: { item: UserListCardItem }) => {
         const isSelected = item.user.id === selectedId;
+
         return (
             <View>
                 <Spacer size='sm' />
@@ -33,7 +33,7 @@ const UserListCard: React.FC<UserListListCardProps> = ({ data, onPress }) => {
         );
     };
 
-    return <FlatList data={data} renderItem={renderItem} keyExtractor={(item, index) => index} horizontal />;
+    return <FlatList data={settleUsers} renderItem={renderItem} keyExtractor={(item, index) => index} horizontal />;
 };
 
 export default UserListCard;

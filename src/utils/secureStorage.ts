@@ -1,4 +1,5 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export enum SecureStorageKey {
     ACCESS_TOKEN = 'access-token',
@@ -35,9 +36,18 @@ const clearStorage = async () => {
     }
 };
 
+const removeItemFromStorage = async () => {
+    try {
+        await AsyncStorage.clear();
+    } catch (error) {
+        console.error(`Error removing item with key`, error);
+    }
+};
+
 export const SecureUtils = {
     set,
     get,
     remove,
     clearStorage,
+    removeItemFromStorage,
 };

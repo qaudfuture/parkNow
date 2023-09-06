@@ -24,6 +24,8 @@ import { DatePicker } from './datepicker';
 import { Loader } from './loader';
 import { BottomCard } from './bottommodal';
 import { DateTimePicker } from './datetimePicker';
+import { Image, ImageVariant } from './image';
+
 import Error from './error';
 export { default as ErrorBoundry } from './errorboundary';
 
@@ -56,4 +58,6 @@ export {
     BottomCard,
     DateTimePicker,
     Error,
+    Image,
+    ImageVariant,
 };

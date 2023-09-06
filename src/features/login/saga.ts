@@ -6,6 +6,7 @@ import { SecureStorageKey, SecureUtils } from '../../utils/secureStorage';
 import { setGlobalBaseUrl, setGlobalHeader } from '../../network/axios';
 import { NETWORK_CONST } from '../../network/contants';
 import { SetLoginAuthProps } from '../../hooks/useAuth';
+import AsyncStorage from '@react-native-community/async-storage';
 
 type ResponseData = {
     token: string;
@@ -28,6 +29,16 @@ export function userLogin(data: SetLoginAuthProps) {
     return Network.networkCall(config);
 }
 
+// Store user data and access token
+const storeUserData = async (userData, accessToken) => {
+    try {
+        await AsyncStorage.setItem('userData', JSON.stringify(userData));
+        await AsyncStorage.setItem('accessToken', accessToken);
+    } catch (error) {
+        console.error('Error storing user data:', error);
+    }
+};
+
 export function* loginRequestSagaWorker({ payload }: ReturnType<typeof request>) {
     try {
         const response: AxiosResponse<unknown> = yield call(userLogin, payload);
@@ -42,6 +53,7 @@ export function* loginRequestSagaWorker({ payload }: ReturnType<typeof request>)
             if (token) {
                 setGlobalBaseUrl(NETWORK_CONST.BASE_URL);
                 setGlobalHeader(token);
+                storeUserData(user, token);
                 SecureUtils.set(SecureStorageKey.ACCESS_TOKEN, token);
                 SecureUtils.set(SecureStorageKey.USER_DATA, JSON.stringify(user));
             }
@@ -55,6 +67,7 @@ export function* loginRequestSagaWorker({ payload }: ReturnType<typeof request>)
 export function* LoginClearWorker() {
     try {
         SecureUtils.clearStorage();
+        SecureUtils.removeItemFromStorage();
         setGlobalBaseUrl(NETWORK_CONST.AUTH_BASE_URL);
     } finally {
         yield put(clearState());

@@ -3,7 +3,7 @@ import { RouteName } from '../routes/routeName';
 
 export const featureList = [
     { title: 'Book Card', color: '#2C62FF', image: Images.bookcard, screenName: RouteName.BOOK_CARD },
-    { title: 'Used Cards', color: '#2CC999', image: Images.Usedcard, screenName: RouteName.PAYMENT_DETAILS },
+    { title: 'Bookings', color: '#2CC999', image: Images.Usedcard, screenName: RouteName.BOOKING_DETAILS },
     { title: 'Pay', color: '#FAB41B', image: Images.payments, screenName: RouteName.PAYMENT_DETAILS },
     { title: 'Park My Car', color: '#FE5E5A', image: Images.ParkCar, screenName: RouteName.PAYMENT_DETAILS },
 ];
@@ -25,7 +25,7 @@ export const profileCardfeatureList = [
         title: 'Booking History',
         color: 'rgba(254, 216, 77, 0.2)',
         image: Images.bookingHistory,
-        screenName: RouteName.PAYMENT_DETAILS,
+        screenName: RouteName.BOOKING_DETAILS,
     },
     {
         title: 'Privacy & Settings',

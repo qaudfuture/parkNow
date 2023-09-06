@@ -5,6 +5,8 @@ import { DashboardStackParamList } from './type';
 import { Dashboard } from '../features/dashboard';
 import { CardBooking, CardBookingAvailableSlots, CardBookConfirm, CardBookingSuccess } from '../features/cardbooking';
 import { PaymentDetails, AddPaymentDetails, PaymentSuccess, SettlePayment } from '../features/payment';
+import { BookingDetails } from '../features/bookingdetails';
+
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 
 const DashboardStack = () => {
@@ -24,6 +26,7 @@ const DashboardStack = () => {
             <Stack.Screen name={RouteName.BOOK_CARDAVAILABLE_SLOTS} component={CardBookingAvailableSlots} />
             <Stack.Screen name={RouteName.BOOK_CARDCONFIRM} component={CardBookConfirm} />
             <Stack.Screen name={RouteName.BOOK_CARDSUCCEESS} component={CardBookingSuccess} />
+            <Stack.Screen name={RouteName.BOOKING_DETAILS} component={BookingDetails} />
 
             {/* <Stack.Screen name={RouteName.ADD_PAYMENT} component={AddPaymentDetails} /> */}
             {/* <Stack.Screen name={RouteName.STORY_LIST} component={StoryList} /> */}

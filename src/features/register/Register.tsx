@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, TextInput, Text, Button, Header, Spacer, RegisterProgressIndicator } from '../../components';
 import validateForm from '../../hooks/useFormik';
@@ -7,6 +7,7 @@ import { RouteName } from '../../routes/routeName';
 import { ScreenProps } from '../../routes/type';
 import { ProgreesIndicatorContainer } from './Register.styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// import { useToast } from '../../components/toast/ToastProvider';
 
 export type OnRegisterProps = ScreenProps<RouteName.REGISTER>;
 
@@ -15,16 +16,25 @@ interface RegistrationPros {
 }
 
 const Register: React.FC<RegistrationPros> = (navigationValu) => {
+    // const [status, setStatus] = useState<'success' | 'fail' | null>(null);
+
     const { navigation } = navigationValu;
     const { useRegistrationForm } = validateForm();
     const { formik, handleValidation } = useRegistrationForm();
+    // const { showToast } = useToast();
+    // const instantPopOut = () => {
+    //     setStatus(null);
+    // };
     // const { loginData, dispatchRegistration } = useAuth();
+    useEffect(() => {}, []);
 
     const _onClickLogin = () => navigation.navigate(RouteName.LOGIN);
     const handleNextScreen = async () => {
         const validatedData = await handleValidation();
         if (validatedData) {
-            navigation.navigate({ screen: RouteName.REGISTERUPLOAD, params: validatedData });
+            console.log('validatedData', validatedData);
+            // setStatus('success');
+            navigation.navigate(RouteName.REGISTERUPLOAD, { userData: JSON.stringify(validatedData) });
         }
     };
     return (
@@ -43,6 +53,8 @@ const Register: React.FC<RegistrationPros> = (navigationValu) => {
                 keyboardShouldPersistTaps='handled'>
                 <Text variant='header'>Set up your profile</Text>
                 <Spacer size='md' />
+                {/* <CustomToast status={status} instantPopOut={instantPopOut} /> */}
+
                 <ProgreesIndicatorContainer>
                     <RegisterProgressIndicator isLastScreen={true} width='48%' />
                     <RegisterProgressIndicator isLastScreen={false} width='48%' />
@@ -111,10 +123,9 @@ export default Register;
 
 const styles = StyleSheet.create({
     registerButton: {
-        marginBottom: 10,
         width: '90%',
         alignSelf: 'center',
     },
-    container: { flex: 1 },
-    contentContainer: { flexGrow: 1 },
+    container: { flexGrow: 1 },
+    contentContainer: {},
 });

@@ -7,9 +7,10 @@ import SplashScreen from 'react-native-splash-screen';
 import { useIsLoggedIn } from '../hooks';
 import { setGlobalBaseUrl } from '../network/axios';
 import { NETWORK_CONST } from '../network/contants';
+import { setGlobalHeader } from '../network/axios';
 //setGlobalHeader accessToken
 const Setup: React.FC = () => {
-    const { isLoggedIn, isLoading } = useIsLoggedIn();
+    const { isLoggedIn, isLoading, accessToken } = useIsLoggedIn();
 
     useEffect(() => {
         setTimeout(() => {
@@ -19,8 +20,8 @@ const Setup: React.FC = () => {
 
     if (isLoading) return <Loader />;
 
-    if (isLoggedIn) {
-        // setGlobalHeader(accessToken);
+    if (isLoggedIn && accessToken != '') {
+        setGlobalHeader(accessToken);
         setGlobalBaseUrl(NETWORK_CONST.BASE_URL);
     }
 

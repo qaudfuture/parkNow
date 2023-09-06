@@ -5,7 +5,6 @@ export const Container = styled.View`
     padding: 10px;
     border: 2px solid ${({ theme }) => theme.colors.lightgray};
     border-radius: 10px;
-    min-height: 8%;
 `;
 
 export const LeftInnerContainer = styled.View`

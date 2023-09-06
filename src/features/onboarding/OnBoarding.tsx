@@ -8,14 +8,16 @@ export type OnBoardProps = ScreenProps<RouteName.ONBOARDING>;
 
 const OnBoarding: React.FC<OnBoardProps> = (props: OnBoardProps) => {
     const { navigation } = props;
-    const _onClickRegistre = () => navigation.navigate('AuthStack', { screen: RouteName.REGISTER });
+    const _onClickRegister = () => navigation.navigate(RouteName.REGISTER);
+    const _onClickLogin = () => navigation.navigate(RouteName.LOGIN);
+
     return (
         <SafeAreaView
             style={{
-                backgroundColor: '#0D0D0D',
+                backgroundColor: '#FFF',
                 flex: 1,
             }}>
-            <OnBoardingComp onClickRegister={_onClickRegistre} onClickLogin={() => {}} />
+            <OnBoardingComp onClickRegister={_onClickRegister} onClickLogin={_onClickLogin} />
         </SafeAreaView>
     );
 };

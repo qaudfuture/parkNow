@@ -1,6 +1,6 @@
 export const Images = {
-    onBoard: require('../images/onBoard.png'),
-    carMove: require('../images/CarMoving.png'),
+    onBoard: require('../images/onBoardLight.png'),
+    carMove: require('../images/onBoardCardMove.png'),
     carIcon: require('../images/carIcon.png'),
     backArrow: require('../images/Back-arrow.png'),
     backArrowDark: require('../images/Back-arrow-dark.png'),
@@ -23,4 +23,5 @@ export const Images = {
     success: require('../images/checked.png'),
     loader: require('../images/loader.gif'),
     booking: require('../images/booking.png'),
+    noBookings: require('../images/nodata.gif'),
 };

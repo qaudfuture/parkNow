@@ -18,11 +18,15 @@ const defaultProps: Partial<TransactionCardProps> = {
     image: Images.userAvatar,
     amount: 120,
     isPayment: true,
+    loggedInUser: 'string',
 };
-const TransactionCard: React.FC<TransactionCardProps> = ({ data }: TransactionCardProps & typeof defaultProps) => {
+const TransactionCard: React.FC<TransactionCardProps> = ({
+    data,
+    loggedInUser,
+}: TransactionCardProps & typeof defaultProps) => {
     const renderItem = ({ item }: { item: TransactionCardListProps }) => {
         const transactionDate = item?.date.split('T')[0];
-        console.log('STATTUSS', item);
+        console.log('STATTUSS', item, loggedInUser);
 
         return (
             <>
@@ -36,7 +40,7 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ data }: TransactionCa
                         <LeftPreviousBookingUserContainer>
                             <Spacer size='xs' />
                             <Text variant='body' style={{ fontSize: 14 }}>
-                                {item.isPayment ? 'Harsha' : item.payedBy}
+                                {item.isPayment ? loggedInUser : item.payedBy}
                             </Text>
                             <Spacer size='xs' />
                             <Text variant='title' style={{ fontSize: 12 }}>
@@ -48,7 +52,7 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ data }: TransactionCa
                         <Text
                             variant='title'
                             style={{ textAlign: 'right', fontSize: 12, color: item.isPayment ? 'red' : 'green' }}>
-                            {item.amount}
+                            {item.amount?.toFixed(2)}
                         </Text>
                     </RightInnerContainer>
                 </Container>

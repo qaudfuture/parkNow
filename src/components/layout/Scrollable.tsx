@@ -54,7 +54,7 @@ const Scrollable: React.FC<ScrollableProps> = (props: ScrollableProps) => {
 
 const style = StyleSheet.create({
     safeArea: {
-        backgroundColor: '#52232d',
+        backgroundColor: '#FFF',
     },
     safeAreaView: {
         flex: 1,

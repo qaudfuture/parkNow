@@ -9,27 +9,34 @@ import {
     RegisterProgressIndicator,
     Spacer,
     Card,
+    Loader,
 } from '../../components';
 import useAuth from '../../hooks/useAuth';
 import { RouteName } from '../../routes/routeName';
 import { get } from 'lodash';
 import { ScreenProps } from '../../routes/type';
+// import { useToast } from '../../components/toast/ToastProvider';
 
 export type OnRegisterUploadProps = ScreenProps<RouteName.REGISTERUPLOAD>;
 
 const RegisterProfileUpload: React.FC<OnRegisterUploadProps> = (props: OnRegisterUploadProps) => {
     // const [isShowToastNotification, setIsShowToastNotification] = useState(false);
-    const { navigation, route } = props;
-    const params = route.params;
+    // const [status, setStatus] = useState<'success' | 'fail' | null>(null);
+
+    const { navigation } = props;
+    // const { showToast } = useToast();
+
+    // const params = route.params;
+    const userData = JSON.parse(get(props, ['route', 'params', 'userData']));
+
     const { registrationData, dispatchRegistration } = useAuth();
     // const isLoading = get(registrationData, ['loading'], false);
     const isSuccess = get(registrationData, ['data'], false);
-    // const showToast = get(registrationData, ['showToast'], false);
-    // const showToastRef = useRef(showToast);
-
+    const isLoading = get(registrationData, ['loading'], false);
+    // const isSuccess = get(registrationData, ['is'], false);
     // const isError = get(registrationData, ['error'], false);
 
-    const name = params.firstname.concat(params.lastname);
+    const name = userData.firstname.concat(userData.lastname);
     // useEffect(() => {
     //     if (showToast && showToast !== showToastRef.current) {
     //         setIsShowToastNotification(true);
@@ -37,10 +44,17 @@ const RegisterProfileUpload: React.FC<OnRegisterUploadProps> = (props: OnRegiste
     //     showToastRef.current = showToast;
     // }, [showToast]);
 
-    const _onClickLogin = () => {
-        console.log('ONMLOGINCLIKEDDd');
+    // useEffect(() => {
+    //     setStatus('fail');
+    // }, [isError]);
 
-        navigation.navigate('AuthStack', { screen: RouteName.LOGIN });
+    // const instantPopOut = () => {
+    //     setStatus(null);
+    // };
+
+    const _onClickLogin = () => {
+        // setStatus('success');
+        navigation.navigate(RouteName.LOGIN);
     };
     if (isSuccess) {
         _onClickLogin();
@@ -48,15 +62,16 @@ const RegisterProfileUpload: React.FC<OnRegisterUploadProps> = (props: OnRegiste
     const _onClickRegister = () =>
         dispatchRegistration({
             name: name,
-            email: params.email,
-            carNumber: params.carNumberPlate,
-            contactNumber: params.phonenumber,
-            password: params.password,
-            createdDate: '2023-08-30T11:27:49.893Z',
-            updatedDate: '2023-08-30T11:27:49.893Z',
+            email: userData.email,
+            carNumber: userData.carNumberPlate,
+            contactNumber: userData.phonenumber,
+            password: userData.password,
+            createdDate: new Date(),
+            updatedDate: new Date(),
             imageS3Link: 'string',
+            DeviceId: 'Iphone',
         });
-
+    if (isLoading) return <Loader />;
     return (
         <Layout.Base
             header={<Header.LoginHeader _onClickLogin={_onClickLogin} />}
@@ -69,6 +84,7 @@ const RegisterProfileUpload: React.FC<OnRegisterUploadProps> = (props: OnRegiste
             }>
             <Text variant='header'>Set up your profile</Text>
             <Spacer size='md' />
+            {/* <CustomToast status={status} instantPopOut={instantPopOut} /> */}
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <RegisterProgressIndicator isLastScreen={true} />
                 <RegisterProgressIndicator isLastScreen={true} />

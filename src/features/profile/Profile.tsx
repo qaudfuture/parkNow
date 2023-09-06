@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Images } from '../../resources/images';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Spacer, Text, ProfileFeatureListCard } from '../../components';
+import { Spacer, Text, ProfileFeatureListCard, Loader } from '../../components';
 import { useAuth, useIsLoggedIn } from '../../hooks';
 import { ScreenProps } from '../../routes/type';
 import { Image } from './Profile.style';
@@ -15,7 +15,7 @@ export type ProfileProps = ScreenProps<RouteName.PROFILE_DETAILS>;
 
 const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
     const { navigation } = props;
-    const { logOut } = useIsLoggedIn();
+    const { logOut, user, userloading } = useIsLoggedIn();
 
     const { setLoggedOut } = useAuth();
 
@@ -30,10 +30,13 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
         if (screenName == RouteName.LOGIN) {
             setLoggedOut();
             logOut();
-            navigation.navigate(RouteName.LOGIN);
+            // navigation.navigate(RouteName.LOGIN);
         }
         navigation.navigate(screenName);
     };
+
+    if (userloading) return <Loader />;
+
     // const loggedInData = useEncryptedStorage(SecureStorageKey.USER_DATA);
     return (
         <Layout.Base>
@@ -45,11 +48,11 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 </View>
                 <View style={{ minWidth: '55%', justifyContent: 'center' }}>
                     <Text variant='header' style={{ fontSize: 18, textAlign: 'left' }}>
-                        Harsha
+                        {!userloading && user && user.name}
                     </Text>
                     <Spacer size='sm' />
                     <Text variant='title' style={{ fontSize: 12, textAlign: 'left', color: 'gray' }}>
-                        hvardhan2011@gmail.com
+                        {!userloading && user && user.email}
                     </Text>
                 </View>
                 <View style={{ minWidth: '15%', justifyContent: 'center', alignItems: 'center' }}>

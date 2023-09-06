@@ -17,7 +17,7 @@ import { RouteName } from '../../routes/routeName';
 import { PaymentActions, AddPaymentActions } from '../payment';
 import { get } from 'lodash';
 import { DashbaordStackScreenProp } from '../../routes/type';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useIsLoggedIn } from '../../hooks';
 
 export type PaymentDetailsProp = DashbaordStackScreenProp<RouteName.PAYMENT_DETAILS>;
 
@@ -27,11 +27,11 @@ const PaymentDetails: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp)
 
     const _onClickAddPayment = () => navigation.navigate(RouteName.ADD_PAYMENT);
     const _onClickSettlePayment = () => navigation.navigate(RouteName.SETTLE_PAYMENT);
-
+    const { user, userloading } = useIsLoggedIn();
     useEffect(() => {
-        dispatch(PaymentActions.request({ userId: 1 }));
-        dispatch(AddPaymentActions.request({ userId: 23 }));
-    }, []);
+        dispatch(PaymentActions.request({ userId: user?.id }));
+        dispatch(AddPaymentActions.request({ userId: user?.id }));
+    }, [user && !userloading]);
 
     const previousTransactions = useAppSelector((state) => state.payments.payment);
 
@@ -40,6 +40,7 @@ const PaymentDetails: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp)
     // const error = get(previousTransactions, 'error');
 
     const getPendingPayments = useAppSelector((state) => state.payments.addpayment);
+    console.log('getPendingPayments', getPendingPayments);
 
     const pendingPaymentData = get(getPendingPayments, 'data');
     const pendingAmount =
@@ -60,7 +61,7 @@ const PaymentDetails: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp)
                 </Text>
                 <Spacer size='sm' />
                 <Text variant='title' style={{ fontSize: 20 }}>
-                    AED {pendingAmount}
+                    AED {pendingAmount.toFixed(2)}
                 </Text>
                 <Spacer size='sm' />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -93,7 +94,7 @@ const PaymentDetails: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp)
                 <TransactionSelector data={transactionSelector} onPress={() => {}} />
             </View>
             <Spacer size='md' />
-            <TransactionCard data={data} />
+            <TransactionCard data={data} loggedInUser={user && !userloading && user.name} />
         </Layout.Base>
     );
 };

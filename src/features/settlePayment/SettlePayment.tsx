@@ -5,7 +5,7 @@ import { DashbaordStackScreenProp } from '../../routes/type';
 import { AddPaymentActions, SettlePaymentActions } from '../payment';
 import { get } from 'lodash';
 import { RouteName } from '../../routes/routeName';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useIsLoggedIn } from '../../hooks';
 import { ButtonContainer, TextInputContainer, UserListContainer } from './SettlePayment.style';
 
 export type SettlePaymentProp = DashbaordStackScreenProp<RouteName.SETTLE_PAYMENT>;
@@ -23,14 +23,15 @@ const SettlePayment: React.FC<SettlePaymentProp> = (props: SettlePaymentProp) =>
 
     const getSettlePaymentList = get(settleUpUserData, 'data');
     const isgetPaymentLoading = get(settleUpUserData, 'loading', false);
+    const { user, userloading } = useIsLoggedIn();
 
     const settleUpRequestData = useAppSelector((state) => state.payments.settlePayment);
 
     const getSettleUpResponse = get(settleUpRequestData, 'data');
     const getSettleUpResponseLoading = get(settleUpRequestData, 'loading', false);
     useEffect(() => {
-        dispatch(AddPaymentActions.request({ userId: 23 }));
-    }, []);
+        dispatch(AddPaymentActions.request({ userId: user?.id }));
+    }, [user && !userloading]);
 
     const _onSettleUpSuccess = () => {
         dispatch(SettlePaymentActions.clear());
@@ -42,16 +43,18 @@ const SettlePayment: React.FC<SettlePaymentProp> = (props: SettlePaymentProp) =>
     }, [getSettleUpResponse]);
 
     const _onUserSelected = (selectedData) => {
-        const settleData = {
-            payerUserId: 1,
-            receiverUserId: selectedData.user.id,
-            amount: selectedData.amountToSettle,
-            date: new Date(),
-            createdDate: new Date(),
-            modifiedDate: new Date(),
-        };
-        setAddAmount(selectedData.amountToSettle);
-        setSettleUpPayLoad(settleData);
+        if (user && !userloading) {
+            const settleData = {
+                payerUserId: user?.id,
+                receiverUserId: selectedData.user.id,
+                amount: selectedData.amountToSettle,
+                date: new Date(),
+                createdDate: new Date(),
+                modifiedDate: new Date(),
+            };
+            setAddAmount(selectedData.amountToSettle);
+            setSettleUpPayLoad(settleData);
+        }
     };
 
     if (isgetPaymentLoading || getSettleUpResponseLoading) return <Loader />;

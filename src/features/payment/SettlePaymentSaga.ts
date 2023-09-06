@@ -28,7 +28,7 @@ export function settlePayment(data: unknown) {
     console.log(data);
     console.log('====================================');
     const config: AxiosRequestConfig = {
-        url: END_POINTS.ADD_PAYMENT,
+        url: END_POINTS.SETTLE_PAYMENT,
         method: 'POST',
         data,
     };
