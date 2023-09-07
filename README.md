@@ -8,7 +8,8 @@ npx pod-install ios
  
 
  
-📱 iOS
+ 📱 iOS
+ 
 #To run the app 🏃‍♂️
 npm ios
 
