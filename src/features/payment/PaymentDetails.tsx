@@ -28,9 +28,11 @@ const PaymentDetails: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp)
     const _onClickAddPayment = () => navigation.navigate(RouteName.ADD_PAYMENT);
     const _onClickSettlePayment = () => navigation.navigate(RouteName.SETTLE_PAYMENT);
     const { user, userloading } = useIsLoggedIn();
+
     useEffect(() => {
-        dispatch(PaymentActions.request({ userId: user?.id }));
-        dispatch(AddPaymentActions.request({ userId: user?.id }));
+        const userId = user?.id;
+        dispatch(PaymentActions.request({ userId: userId }));
+        dispatch(AddPaymentActions.request({ userId: userId }));
     }, [user && !userloading]);
 
     const previousTransactions = useAppSelector((state) => state.payments.payment);
@@ -40,9 +42,8 @@ const PaymentDetails: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp)
     // const error = get(previousTransactions, 'error');
 
     const getPendingPayments = useAppSelector((state) => state.payments.addpayment);
-    console.log('getPendingPayments', getPendingPayments);
-
     const pendingPaymentData = get(getPendingPayments, 'data');
+
     const pendingAmount =
         pendingPaymentData != undefined &&
         pendingPaymentData?.reduce(

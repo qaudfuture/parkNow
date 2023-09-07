@@ -38,7 +38,6 @@ const CardBookConfirm: React.FC<BookCardConfirmProps> = (props: BookCardConfirmP
     const cardBookingStatus = useAppSelector((state) => state.cardBooking);
     const dataStatus = get(cardBookingStatus, 'isCardBookdata');
     const isLoading = get(cardBookingStatus, 'isCardBookloading', false);
-    console.log('STUSUSUSUSSISUSU', dataStatus, isLoading);
 
     const hideDatePicker = () => {
         setIsModalVisible(false);
@@ -49,7 +48,6 @@ const CardBookConfirm: React.FC<BookCardConfirmProps> = (props: BookCardConfirmP
     };
 
     const _onEditSelectedBooking = (bookedSlot) => {
-        console.log('bookedSlotEDITTSTSTS', bookedSlot);
         setSelectedBooking(bookedSlot);
         setIsVisible(true);
     };
@@ -133,30 +131,22 @@ const CardBookConfirm: React.FC<BookCardConfirmProps> = (props: BookCardConfirmP
         // Format the adjusted date and time back into ISO 8601 format
         const formattedTimestamp = originalDate.toISOString();
         const separatedTime = separateTimeFromUTC(formattedTimestamp);
-        console.log('separatedTime', separatedTime, separatedTime);
         const bookedSlot = JSON.parse(JSON.stringify(selectedBooking));
-        console.log('separatedTime', bookedSlot);
         if (timeType == 'START') {
             const separatedDate = separateDateFromUTC(bookedSlot.startDate);
-            console.log('separatedTime', separatedDate, separatedTime);
-
             const combinedDateTime = combineDateAndTime(separatedDate, separatedTime);
             // const selectedDate = new Date(combinedDateTime);
             bookedSlot.startDate = combinedDateTime;
-            console.log('COMBINEDATE', combinedDateTime);
             setSelectedBooking(bookedSlot);
             const updatedSlot = updateBookedSlotValue(bookedSlots, bookedSlot, 'id');
-            console.log('COMBINEDATE222', updatedSlot);
             setbookingDetails(updatedSlot);
         } else {
             const separatedDate = separateDateFromUTC(bookedSlot.endDate);
             const combinedDateTime = combineDateAndTime(separatedDate, separatedTime);
-
             // const newDate = addHours(selectedDate, 8);
             bookedSlot.endDate = combinedDateTime;
             setSelectedBooking(bookedSlot);
             const updatedSlot = updateBookedSlotValue(bookedSlots, bookedSlot, 'id');
-            console.log('updatedSlot', updatedSlot);
             setbookingDetails(updatedSlot);
         }
 

@@ -80,21 +80,14 @@ const CardBooking: React.FC<CardBookingPros> = (navigationProps) => {
     useEffect(() => {
         if (data) {
             const result = convertToJson(data);
-            console.log('CONVERTEDDDATATTA', result);
-
             navigation.navigate(RouteName.BOOK_CARDAVAILABLE_SLOTS, { availableSlots: JSON.stringify(result) });
         }
     }, [data]);
 
-    console.log('CARDBOOKING', JSON.stringify(data));
-
     const _OnCheckAvailablity = () => {
         const payLoad = getPayLoad();
-        console.log('PAYLOADDDDD', payLoad.startDate, payLoad.endDate);
         // const startBookingDate = moment(payLoad.startDate, 'YYYY-MM-DD').format('YYYY-DD-MM');
         // const endBookingDate = moment(payLoad.endDate, 'YYYY-MM-DD').format('YYYY-DD-MM');
-
-        console.log('payLoad', payLoad);
         dispatch(CardBookingActions.request({ startDate: payLoad.startDate, endDate: payLoad.endDate }));
     };
 

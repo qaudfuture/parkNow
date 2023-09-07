@@ -1,8 +1,6 @@
 import { DefaultTheme } from 'styled-components/native';
-// import { studentFonts } from './studentFonts';
 
 export const LightTheme: DefaultTheme = {
-    // fonts: studentFonts,
     colors: {
         primary: '#FED94D',
         secondary: '#FAB41B',

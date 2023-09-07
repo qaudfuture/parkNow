@@ -1,55 +1,11 @@
-// const abc = {
-//     '2023-09-01T09:00:00+04:00': [
-//         {
-//             startDate: '2023-09-01T09:00:00+04:00',
-//             endDate: '2023-09-01T18:00:00+04:00',
-//             cardId: 1,
-//         },
-//         {
-//             startDate: '2023-09-01T09:00:00+04:00',
-//             endDate: '2023-09-01T18:00:00+04:00',
-//             cardId: 2,
-//         },
-//         {
-//             startDate: '2023-09-04T09:00:00+04:00',
-//             endDate: '2023-09-04T18:00:00+04:00',
-//             cardId: 3,
-//         },
-//     ],
-//     '2023-09-02T09:00:00+04:00': [
-//         {
-//             startDate: '2023-09-01T09:00:00+04:00',
-//             endDate: '2023-09-01T18:00:00+04:00',
-//             cardId: 1,
-//         },
-//         {
-//             startDate: '2023-09-01T09:00:00+04:00',
-//             endDate: '2023-09-01T18:00:00+04:00',
-//             cardId: 2,
-//         },
-//         {
-//             startDate: '2023-09-04T09:00:00+04:00',
-//             endDate: '2023-09-04T18:00:00+04:00',
-//             cardId: 3,
-//         },
-//     ],
-// };
+import { Login } from './login';
+import { Register } from './register';
+import { BookingDetails } from './bookingdetails';
+import { CardBooking } from './cardbooking';
+import { Dashboard } from './dashboard';
+import { PaymentDetails } from './payment';
+import { Profile } from './profile';
+import { SettlePayment } from './settlePayment';
+import { OnBoarding } from './onboarding';
 
-// //                     '':
-// //                 },
-// //             },
-// //         ],
-// //         '2': [
-// //             {
-// //                 availableSlot: {
-// //                     '2023-09-01T09:00:00+04:00': [
-// //                         {
-// //                             startDate: '2023-09-01T09:00:00+04:00',
-// //                             endDate: '2023-09-01T18:00:00+04:00',
-// //                         },
-// //                     ],
-// //                 },
-// //             },
-// //         ],
-// //     },
-// // };
+export { Login, Register, BookingDetails, CardBooking, Dashboard, PaymentDetails, Profile, SettlePayment, OnBoarding };

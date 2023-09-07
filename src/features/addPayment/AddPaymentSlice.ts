@@ -15,9 +15,8 @@ const initialState: PaymentState = {
     data: undefined,
     showToast: false,
 };
-
-const addpaymentReducer = createSlice({
-    name: 'addPayment',
+const addPaymentReducer = createSlice({
+    name: 'payments',
     initialState,
     reducers: {
         request(state: PaymentState, action: PayloadAction<AddPaymentProps>) {
@@ -35,5 +34,5 @@ const addpaymentReducer = createSlice({
     },
 });
 
-export const { actions } = addpaymentReducer;
-export default addpaymentReducer.reducer;
+export const { actions } = addPaymentReducer;
+export default addPaymentReducer.reducer;

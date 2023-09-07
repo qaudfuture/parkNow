@@ -27,17 +27,6 @@ const DashboardStack = () => {
             <Stack.Screen name={RouteName.BOOK_CARDCONFIRM} component={CardBookConfirm} />
             <Stack.Screen name={RouteName.BOOK_CARDSUCCEESS} component={CardBookingSuccess} />
             <Stack.Screen name={RouteName.BOOKING_DETAILS} component={BookingDetails} />
-
-            {/* <Stack.Screen name={RouteName.ADD_PAYMENT} component={AddPaymentDetails} /> */}
-            {/* <Stack.Screen name={RouteName.STORY_LIST} component={StoryList} /> */}
-            {/* <Stack.Screen
-                name={RouteName.STORY_DETAIL}
-                component={StoryDetail}
-            />
-            <Stack.Screen
-                name={RouteName.STORY_SEARCH}
-                component={StorySearch}
-            /> */}
         </Stack.Navigator>
     );
 };

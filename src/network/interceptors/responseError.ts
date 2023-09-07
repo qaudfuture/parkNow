@@ -25,7 +25,6 @@ const refreshTokenTry = async (config: OriginalRequestType) => {
 
 export default async function defaultResponseError(error: AxiosError) {
     if (error.response) {
-        console.log('ERORORORO', error.response);
         const config = error.config as OriginalRequestType;
         if (error.response.status === 405 && !config?._retry) {
             refreshTokenTry(config);

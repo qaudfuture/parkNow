@@ -2,12 +2,12 @@ import { END_POINTS, Network } from '../../network';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './BookingDetailsSlice';
-// import { StoryType } from './type';
+// import { BookingType } from './type';
 
 const { request, success, error } = actions;
 
 // type ResponseTyp = {
-//     results: StoryType[];
+//     results: BookingType[];
 // };
 
 export default function* bookingListSagaWatcher() {

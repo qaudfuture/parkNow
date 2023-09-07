@@ -26,7 +26,6 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
 }: TransactionCardProps & typeof defaultProps) => {
     const renderItem = ({ item }: { item: TransactionCardListProps }) => {
         const transactionDate = item?.date.split('T')[0];
-        console.log('STATTUSS', item, loggedInUser);
 
         return (
             <>

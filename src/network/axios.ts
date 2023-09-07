@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as Interceptors from './interceptors';
 import { NETWORK_CONST } from './contants';
 import { SecureStorageKey, SecureUtils } from '../utils/secureStorage';
-
 // import { API_BASE_URL } from '@env';
 
 const BASE_URL = 'https://parkingmanagement20230821181410.azurewebsites.net/';
@@ -33,8 +32,6 @@ export const getAccessToken = async () => {
 };
 
 export const setGlobalHeader = async (token: string) => {
-    // const accessToken = await getAccessToken();
-    // console.log('BearertokenTOKEN', `Bearer ${accessToken}`);
     BaseAxiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     BaseAxiosInstance.defaults.headers.common['token'] = token;
 };

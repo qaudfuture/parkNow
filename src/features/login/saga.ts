@@ -43,13 +43,9 @@ export function* loginRequestSagaWorker({ payload }: ReturnType<typeof request>)
     try {
         const response: AxiosResponse<unknown> = yield call(userLogin, payload);
         const { data, status } = response;
-
         console.log('Loginresponse', data, status);
-
         if (status === 200) {
             const { token = '', user = {} } = data as ResponseData;
-
-            console.log('access_token', user);
             if (token) {
                 setGlobalBaseUrl(NETWORK_CONST.BASE_URL);
                 setGlobalHeader(token);

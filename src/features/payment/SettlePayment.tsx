@@ -35,8 +35,6 @@ const SettlePayment: React.FC<SettlePaymentProp> = (props: SettlePaymentProp) =>
         dispatch(AddPaymentActions.request({ userId: user?.id }));
     }, [user && !userloading]);
 
-    console.log('getSettlePaymentList', getSettlePaymentList);
-
     const _onSettleUpSuccess = () => {
         dispatch(SettlePaymentActions.clear());
         navigation.navigate(RouteName.PAYMENT_SUCCESS);

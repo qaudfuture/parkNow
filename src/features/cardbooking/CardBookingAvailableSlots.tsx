@@ -139,7 +139,6 @@ const CardBookingAvailableSlots: React.FC<AvailableSlotstProps> = (props: Availa
             </View>
         );
     };
-    console.log('CARDBOOKINGSLOT', JSON.stringify(cardParkingSlots));
 
     return (
         <Layout.Base>

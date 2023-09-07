@@ -1,5 +1,6 @@
 // import { CardBookingAvailableSlotsPrams } from './type';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PaymentProps } from './type';
 
 type PaymentState = {
     loading: boolean;
@@ -31,7 +32,8 @@ const paymentReducer = createSlice({
     name: 'payments',
     initialState,
     reducers: {
-        request(state: PaymentState) {
+        request(state: PaymentState, action: PayloadAction<PaymentProps>) {
+            console.log('=====PayloadAction======', action);
             //action: PayloadAction
             return { ...state, loading: true };
         },
