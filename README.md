@@ -1,4 +1,4 @@
-#To install packages
+To install packages
 npm install
 
 #To install pod install
