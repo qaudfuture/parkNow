@@ -21,7 +21,6 @@ const AddPayment: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp) => 
         setAddAmount(text);
     };
     const { user, userloading } = useIsLoggedIn();
-    console.log('USERDATTATATA', user);
     const paymentStatus = useAppSelector((state) => state.payments.payment);
     const dataStatus = get(paymentStatus, 'addPaymentdata');
     const isLoading = get(paymentStatus, 'addPaymentloading', false);

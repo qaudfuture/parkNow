@@ -93,7 +93,6 @@ const CalendarList: React.FC<CalendarProps> = ({ onSelectDate, selected }) => {
         const currentMonthInfo = getMonthInfo(currentYear, nextMonth);
         setMonthData(currentMonthInfo);
     };
-    console.log('getMonthData', getMonthData);
 
     return (
         <>

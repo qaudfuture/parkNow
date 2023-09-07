@@ -8,8 +8,6 @@ function useEncryptedStorage(key) {
         const fetchData = async () => {
             try {
                 const encryptedData = await SecureUtils.get(key);
-                console.log('encryptedData', encryptedData);
-
                 if (encryptedData) {
                     // Decrypt the data if necessary
                     setLoggedInData(encryptedData);

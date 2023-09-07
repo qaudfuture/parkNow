@@ -29,8 +29,6 @@ const useAuth = () => {
     const authData = useAppSelector((state) => state.auth);
     const loginData = get(authData, 'login');
     const registrationData = get(authData, 'registration');
-    console.log('registrationData', registrationData);
-
     const accesToken = get(loginData, ['data', 'token'], false);
 
     useEffect(() => {

@@ -9,7 +9,6 @@ interface DateTimePickerProps {
 }
 
 const DateTimePickers: React.FC<DateTimePickerProps> = ({ onTimeSelected, isVisible, onCancel, editTimeType }) => {
-    console.log('DATTETETIMEMMODAY', isVisible);
     const _onTimeSlotEdited = (date: Date) => {
         onTimeSelected(date, editTimeType);
     };

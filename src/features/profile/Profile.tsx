@@ -26,7 +26,6 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
     //     // Replace with your actual data key
     // }, []);
     const _onClickFeature = (screenName: string) => {
-        console.log('screenName', screenName);
         if (screenName == RouteName.LOGIN) {
             setLoggedOut();
             logOut();

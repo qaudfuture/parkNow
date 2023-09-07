@@ -14,7 +14,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const getAccessToken = async (cb: React.Dispatch<React.SetStateAction<string>>) => {
     const token = (await AsyncStorage.getItem('accessToken')) || '';
-    console.log('tokentokentoken', token);
     cb(token);
 };
 

@@ -9,6 +9,7 @@ import {
     BookingDetail,
     CustomCard,
 } from '../../components';
+import { EmptyContainer } from './BookingDetails.style';
 import { DashbaordStackScreenProp } from '../../routes/type';
 import { RouteName } from '../../routes/routeName';
 import { get } from 'lodash';
@@ -21,7 +22,6 @@ export type BookingDetailsProps = DashbaordStackScreenProp<RouteName.BOOKING_DET
 //props: BookingDetailsProps
 const BookingDetails: React.FC<BookingDetailsProps> = () => {
     const [status, setStatus] = useState<'success' | 'fail' | null>(null);
-
     // const { navigation } = props;
     const dispatch = useAppDispatch();
     const { user, userloading } = useIsLoggedIn();
@@ -43,8 +43,6 @@ const BookingDetails: React.FC<BookingDetailsProps> = () => {
         setStatus('fail');
     }, [error]);
 
-    console.log('USERRRR', user);
-
     if (isLoading || userloading) return <Loader />;
 
     const _onEditSelectedBooking = (bookedSlot) => {
@@ -59,11 +57,11 @@ const BookingDetails: React.FC<BookingDetailsProps> = () => {
             <>
                 <CustomCard>
                     <Spacer size='md' />
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <EmptyContainer>
                         <Image source={Images.booking} style={{ width: 100, height: 100 }} />
                         <Spacer size='sm' />
                         <Text variant='title'>No Parking cards Booked</Text>
-                    </View>
+                    </EmptyContainer>
                     <Spacer size='md' />
                 </CustomCard>
             </>

@@ -1,9 +1,5 @@
 // import { AxiosRequestConfig } from 'axios';
 // import { END_POINTS } from './endpoint';
-// import { SecureStorageKey, SecureUtils } from '@TopStories/Utils';
-// import { Network } from './apiRequest';
-// import { store } from '@TopStories/Store';
-// import { actions as LoginAction } from '@TopStories/Screen/Login/reducer';
 // import { setGlobalHeader } from './axios';
 
 // export const tokenRefresh = async () => {

@@ -11,13 +11,11 @@ export type PaymentDetailsProp = DashbaordStackScreenProp<RouteName.ADD_PAYMENT>
 const AddPayment: React.FC<PaymentDetailsProp> = (props: PaymentDetailsProp) => {
     const { navigation } = props;
     const dispatch = useAppDispatch();
-
     const [amount, setAddAmount] = useState<string>('0.0');
     const handleInputChange = (text: string) => {
         setAddAmount(text);
     };
     const { user, userloading } = useIsLoggedIn();
-    console.log('USERDATTATATA', user);
     const paymentStatus = useAppSelector((state) => state.payments.addpayment);
     const dataStatus = get(paymentStatus, 'addPaymentdata');
     const isLoading = get(paymentStatus, 'addPaymentloading', false);

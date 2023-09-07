@@ -20,7 +20,6 @@ type CurrentBookingItemProps = {
 
 const PreviousBookingCard: React.FC<CurrentBookingItemProps> = (props: CurrentBookingItemProps) => {
     const { key = '', name = '', startDate, endDate } = props;
-    console.log('STATRTATATA', startDate, endDate);
     const startBookingtime = localTime(startDate);
     const endBookingTime = localTime(endDate);
 
