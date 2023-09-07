@@ -3,27 +3,27 @@ npm install
 
 #To install pod install
 npx pod-install ios
+ 
 
-
-
+ 
 #IOS
 #To run the app 🏃‍♂️
-yarn ios
+npm ios
 
 #To run on iPhone 14 simulator 🏃‍♂️
-yarn ios:14
+npm ios:14
 
 #To clean ios 🚨
-yarn clean:ios
+npm clean:ios
 
 
 ☎️ Android
 
 #To run on android 🏃‍♂️
-yarn android
+npm android
 
 #To build android release apk 🛠️
-yarn android:release
+npm android:release
 
 #To clean android 🚨
-yarn clean:android
+npm clean:android
